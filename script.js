@@ -1,12 +1,15 @@
 /* =========================================================
    Konar Studio — Lucia Pagano
    ---------------------------------------------------------
-   Tiny, purposeful JS:
-     1. Fade/slide-up reveals (IntersectionObserver, staggered)
-     2. Scroll-through per project card — computes the exact
-        pixel offset (image height - viewport height) so the
-        hover reveal shows the full page, not just a slice.
-     3. Custom cursor on non-touch, non-reduced-motion.
+   Small, purposeful JS:
+     1. Line-mask reveal for [data-lm] headings
+     2. Fade / slide-up reveals on .reveal
+     3. Per-card scroll-through — computes overflow so hover
+        smoothly translates through the whole full-page image
+     4. Custom cursor + cursor-follow glow
+     5. Magnetic buttons
+   Everything degrades gracefully under prefers-reduced-motion
+   and on touch devices (no cursor, no magnetic).
    ========================================================= */
 
 (function () {
@@ -15,8 +18,29 @@
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isTouch        = window.matchMedia('(hover: none)').matches;
 
-  /* ---------- 1. Reveal on scroll ---------- */
-  const reveals = document.querySelectorAll('.reveal');
+  /* =============================================================
+     1. Line-mask reveal
+     Each .lm__line is wrapped in an .lm__inner (overflow:hidden).
+     Under reduced motion the CSS falls back to a simple fade.
+  ============================================================= */
+  document.querySelectorAll('[data-lm]').forEach((h) => {
+    h.querySelectorAll('.lm__line').forEach((line, i) => {
+      // Wrap line in an inner mask if not already wrapped
+      if (!line.parentElement.classList.contains('lm__inner')) {
+        const wrap = document.createElement('span');
+        wrap.className = 'lm__inner';
+        line.parentNode.insertBefore(wrap, line);
+        wrap.appendChild(line);
+      }
+      // stagger
+      line.style.setProperty('--lm-delay', String(i * 90));
+    });
+  });
+
+  /* =============================================================
+     2. Reveal on scroll
+  ============================================================= */
+  const reveals = document.querySelectorAll('.reveal, [data-lm]');
 
   if (prefersReduced || !('IntersectionObserver' in window)) {
     reveals.forEach((el) => el.classList.add('is-in'));
@@ -39,18 +63,12 @@
     reveals.forEach((el) => io.observe(el));
   }
 
-  /* ---------- 2. Card scroll-through ---------- */
-  /*
-     For each project card:
-       - measure the natural size of the screenshot after it loads
-       - compute how many pixels the image overflows the viewport
-       - store as CSS variable --shift on the <img>
-     CSS handles the actual transition on :hover.
-
-     Under reduced motion, we don't set --shift, so the hover
-     transform (translateY(0)) simply keeps the top of the image
-     visible — no auto reveal.
-  */
+  /* =============================================================
+     3. Card scroll-through
+     Measure the rendered image height inside each card's fixed
+     4/3 viewport and set --shift so the hover transform reveals
+     the whole image, no matter its length.
+  ============================================================= */
   const cards = document.querySelectorAll('.card');
 
   function measureCard(card) {
@@ -58,22 +76,19 @@
     const img = card.querySelector('.card__shot');
     if (!viewport || !img) return;
 
-    const vh = viewport.getBoundingClientRect().height;
-    // The image is width:100% inside the viewport, so its rendered
-    // height is naturalHeight * (viewport.width / naturalWidth)
-    const vw = viewport.getBoundingClientRect().width;
-    if (!img.naturalWidth || !img.naturalHeight || !vw || !vh) return;
+    const rect = viewport.getBoundingClientRect();
+    if (!img.naturalWidth || !img.naturalHeight || !rect.width || !rect.height) return;
 
-    const renderedH = img.naturalHeight * (vw / img.naturalWidth);
-    const overflow = Math.max(0, renderedH - vh);
-    // negative — image translates UP to reveal the bottom
+    // Image is width:100% inside the viewport, so rendered height:
+    const renderedH = img.naturalHeight * (rect.width / img.naturalWidth);
+    const overflow = Math.max(0, renderedH - rect.height);
     img.style.setProperty('--shift', `-${Math.round(overflow)}px`);
   }
 
   function setupCard(card) {
     const img = card.querySelector('.card__shot');
     if (!img) return;
-    if (prefersReduced) return; // leave --shift at 0
+    if (prefersReduced) return;
     if (img.complete && img.naturalWidth) {
       measureCard(card);
     } else {
@@ -83,19 +98,35 @@
 
   cards.forEach(setupCard);
 
-  // Recompute on resize (viewport height changes with card width)
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => cards.forEach(measureCard), 120);
   });
 
-  /* ---------- 3. Custom cursor ---------- */
+  /* =============================================================
+     4. Custom cursor + ambient cursor glow
+  ============================================================= */
   const cursor = document.querySelector('.cursor');
-  if (cursor && !isTouch && !prefersReduced) {
+  const ambient = document.querySelector('.ambient');
+  const glow = document.getElementById('cursorGlow');
+
+  const cursorEnabled = cursor && !isTouch && !prefersReduced;
+
+  if (cursorEnabled) {
     let mouseX = 0, mouseY = 0;
-    let curX  = 0, curY  = 0;
-    let raf   = null;
+    let curX = 0, curY = 0;
+    let glowX = 0, glowY = 0;
+    let raf = null;
+    let heroBounds = null;
+
+    function refreshHero() {
+      const hero = document.querySelector('.hero');
+      heroBounds = hero ? hero.getBoundingClientRect() : null;
+    }
+    refreshHero();
+    window.addEventListener('resize', refreshHero);
+    window.addEventListener('scroll', refreshHero, { passive: true });
 
     const activate = () => cursor.classList.add('is-active');
 
@@ -103,28 +134,85 @@
       mouseX = e.clientX;
       mouseY = e.clientY;
       if (!cursor.classList.contains('is-active')) activate();
-      if (!raf) raf = requestAnimationFrame(tick);
-    }, { passive:true });
 
-    window.addEventListener('mouseleave', () => cursor.classList.remove('is-active'));
+      // Hero-only cursor glow
+      if (ambient && glow) {
+        const inHero = heroBounds && mouseY <= heroBounds.bottom + 200;
+        if (inHero) ambient.classList.add('is-cursor');
+        else ambient.classList.remove('is-cursor');
+      }
+
+      if (!raf) raf = requestAnimationFrame(tick);
+    }, { passive: true });
+
+    window.addEventListener('mouseleave', () => {
+      cursor.classList.remove('is-active');
+      if (ambient) ambient.classList.remove('is-cursor');
+    });
     window.addEventListener('blur', () => cursor.classList.remove('is-active'));
 
     function tick() {
-      // small easing for a smoother feel
-      curX += (mouseX - curX) * 0.28;
-      curY += (mouseY - curY) * 0.28;
+      curX += (mouseX - curX) * 0.30;
+      curY += (mouseY - curY) * 0.30;
       cursor.style.transform = `translate3d(${curX}px, ${curY}px, 0)`;
-      if (Math.abs(mouseX - curX) > 0.1 || Math.abs(mouseY - curY) > 0.1) {
-        raf = requestAnimationFrame(tick);
-      } else {
-        raf = null;
+
+      // Softer follow for the ambient glow
+      glowX += (mouseX - glowX) * 0.08;
+      glowY += (mouseY - glowY) * 0.08;
+      if (glow) {
+        glow.style.setProperty('--cx', glowX + 'px');
+        glow.style.setProperty('--cy', glowY + 'px');
       }
+
+      const done =
+        Math.abs(mouseX - curX) < 0.1 &&
+        Math.abs(mouseY - curY) < 0.1 &&
+        Math.abs(mouseX - glowX) < 0.5 &&
+        Math.abs(mouseY - glowY) < 0.5;
+      raf = done ? null : requestAnimationFrame(tick);
     }
 
-    // Grow into "View" label over any card zone
     document.querySelectorAll('.card--cursor').forEach((el) => {
       el.addEventListener('mouseenter', () => cursor.classList.add('is-zone'));
       el.addEventListener('mouseleave', () => cursor.classList.remove('is-zone'));
+    });
+  }
+
+  /* =============================================================
+     5. Magnetic buttons — gentle pull toward cursor
+  ============================================================= */
+  if (!isTouch && !prefersReduced) {
+    const strength = 18; // max px offset
+    document.querySelectorAll('.magnetic').forEach((btn) => {
+      let raf = null;
+      let tx = 0, ty = 0;
+      let cx = 0, cy = 0;
+
+      function loop() {
+        cx += (tx - cx) * 0.18;
+        cy += (ty - cy) * 0.18;
+        btn.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
+        if (Math.abs(tx - cx) > 0.05 || Math.abs(ty - cy) > 0.05) {
+          raf = requestAnimationFrame(loop);
+        } else {
+          raf = null;
+          if (tx === 0 && ty === 0) btn.style.transform = '';
+        }
+      }
+
+      btn.addEventListener('mousemove', (e) => {
+        const r = btn.getBoundingClientRect();
+        const px = (e.clientX - (r.left + r.width  / 2)) / r.width;
+        const py = (e.clientY - (r.top  + r.height / 2)) / r.height;
+        tx = px * strength * 2;
+        ty = py * strength * 2;
+        if (!raf) raf = requestAnimationFrame(loop);
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        tx = 0; ty = 0;
+        if (!raf) raf = requestAnimationFrame(loop);
+      });
     });
   }
 })();
