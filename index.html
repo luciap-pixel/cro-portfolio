@@ -746,14 +746,32 @@ footer{background:color-mix(in srgb,var(--bg) 70%,#fff);border-top:1px solid var
         <h2 class="contact-h2">Let's turn your traffic <em>into revenue.</em></h2>
         <p class="sub">Send me the page you're paying to send traffic to, and I'll tell you where I'd start — no pitch, just a straight read.</p>
         <ul class="contact-stack">
-          <li><a href="YOUR_CALENDLY_URL"><span class="lb">Calendly</span><span class="val">Book a 15-min call</span><span class="arw">→</span></a></li>
+          <!--
+            Calendly row — hidden until I have a real URL.
+            To enable:
+            1. Sign up at https://calendly.com and create a 15-min event type.
+            2. Copy your event URL (looks like https://calendly.com/your-name/intro).
+            3. Uncomment the row below and replace REPLACE_WITH_CALENDLY_URL with your URL.
+          -->
+          <!--
+          <li><a href="REPLACE_WITH_CALENDLY_URL" target="_blank" rel="noopener noreferrer"><span class="lb">Calendly</span><span class="val">Book a 15-min call</span><span class="arw">→</span></a></li>
+          -->
           <li><a href="mailto:lucia@konar.studio"><span class="lb">Email</span><span class="val">lucia@konar.studio</span><span class="arw">→</span></a></li>
           <li><a href="https://www.linkedin.com/in/lucia-pagano-8161a72b7/" target="_blank" rel="noopener noreferrer"><span class="lb">LinkedIn</span><span class="val">lucia-pagano</span><span class="arw">→</span></a></li>
           <li><a href="https://www.tiktok.com/@luuciiaap" target="_blank" rel="noopener noreferrer"><span class="lb">TikTok</span><span class="val">@luuciiaap</span><span class="arw">→</span></a></li>
         </ul>
       </div>
       <div class="contact-r reveal">
-        <form id="contactForm" data-formspree-endpoint="" novalidate>
+        <!--
+          Formsubmit.co: the FIRST time someone submits this form, Formsubmit will send
+          a one-off "Activate your form" email to lucia@konar.studio. Click the link in
+          that email once. After that, all submissions come straight through.
+        -->
+        <form id="contactForm" action="https://formsubmit.co/ajax/lucia@konar.studio" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="New enquiry — Konar Studio">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_honey" value="">
           <div class="fld">
             <label for="name">Name</label>
             <input id="name" name="name" type="text" placeholder="Your name" required autocomplete="name">
@@ -764,7 +782,7 @@ footer{background:color-mix(in srgb,var(--bg) 70%,#fff);border-top:1px solid var
           </div>
           <div class="fld">
             <label for="url">Store or page URL</label>
-            <input id="url" name="url" type="url" placeholder="https://your-brand.com/the-page" autocomplete="url">
+            <input id="url" name="store_url" type="url" placeholder="https://your-brand.com/the-page" autocomplete="url">
           </div>
           <div class="fld">
             <label for="msg">What's not converting?</label>
@@ -1042,7 +1060,7 @@ document.querySelectorAll('[data-prefill="teardown"]').forEach(b=>b.addEventList
   }
 }));
 
-/* Contact form — mailto fallback if data-formspree-endpoint is empty, otherwise fetch */
+/* Contact form — Formsubmit.co AJAX submission */
 (function(){
   const form=document.getElementById('contactForm');
   if(!form) return;
@@ -1050,67 +1068,47 @@ document.querySelectorAll('[data-prefill="teardown"]').forEach(b=>b.addEventList
   const successBox=document.getElementById('formSuccess');
   const parent=form.parentElement;
 
-  const showSuccess=(title,subHtml)=>{
-    successBox.querySelector('.succ-title').textContent=title;
-    successBox.querySelector('.succ-sub').innerHTML=subHtml;
+  const showSuccess=()=>{
+    successBox.querySelector('.succ-title').textContent='Thanks — landed in my inbox.';
+    successBox.querySelector('.succ-sub').innerHTML='I\'ll reply within one working day. Meanwhile, I post store teardowns on <a href="https://www.tiktok.com/@luuciiaap" target="_blank" rel="noopener noreferrer">TikTok @luuciiaap →</a>';
     form.style.display='none';
     successBox.classList.add('show');
     errBox.classList.remove('show');
     requestAnimationFrame(()=>successBox.classList.add('in'));
     try{ parent.scrollIntoView({behavior:reduce?'auto':'smooth',block:'nearest'}); }catch(_){}
   };
-  const showError=(msg)=>{
-    errBox.textContent=msg;
+  const showError=()=>{
+    errBox.innerHTML='Something went wrong. Please email <a href="mailto:lucia@konar.studio">lucia@konar.studio</a> directly.';
     errBox.classList.add('show');
   };
-  const buildMailto=()=>{
-    const name=document.getElementById('name').value.trim();
-    const email=document.getElementById('email').value.trim();
-    const url=document.getElementById('url').value.trim();
-    const msg=document.getElementById('msg').value.trim();
-    const subject=`New enquiry from ${name||'website'}`;
-    const body=[
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Store URL: ${url||'(not provided)'}`,
-      '',
-      'Message:',
-      msg,
-    ].join('\n');
-    return `mailto:lucia@konar.studio?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  };
 
-  form.addEventListener('submit', async (e)=>{
+  form.addEventListener('submit',(e)=>{
     e.preventDefault();
     errBox.classList.remove('show');
     if(!form.checkValidity()){ form.reportValidity(); return; }
 
-    const endpoint=(form.dataset.formspreeEndpoint||'').trim();
-    if(!endpoint){
-      // mailto fallback
-      const url=buildMailto();
-      window.location.href=url;
-      setTimeout(()=>{
-        showSuccess('Your email app should be opening.',
-          'If it didn\'t, email <a href="mailto:lucia@konar.studio">lucia@konar.studio</a> directly.');
-      }, 250);
-      return;
-    }
+    // Spam-bot honeypot: real users can't fill this
+    if(form.querySelector('input[name="_honey"]').value.trim()!==''){ return; }
 
+    const submitButton=form.querySelector('button[type="submit"]');
+    if(!submitButton.dataset.originalHtml) submitButton.dataset.originalHtml=submitButton.innerHTML;
+    submitButton.disabled=true;
+    submitButton.innerHTML='Sending&hellip;';
     form.classList.add('sending');
-    try{
-      const res=await fetch(endpoint,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)});
-      if(res.ok){
-        showSuccess('Thanks — landed in my inbox.',
-          'I\'ll reply within one working day. Meanwhile, I post store teardowns on <a href="https://www.tiktok.com/@luuciiaap" target="_blank" rel="noopener noreferrer">TikTok @luuciiaap →</a>');
-      }else{
-        showError('Something went wrong. Please email lucia@konar.studio.');
-      }
-    }catch(err){
-      showError('Something went wrong. Please email lucia@konar.studio.');
-    }finally{
-      form.classList.remove('sending');
-    }
+
+    fetch(form.action,{
+      method:'POST',
+      headers:{'Accept':'application/json'},
+      body:new FormData(form),
+    })
+      .then(res=>res.ok?res.json():Promise.reject(res))
+      .then(()=>showSuccess())
+      .catch(()=>showError())
+      .finally(()=>{
+        submitButton.disabled=false;
+        submitButton.innerHTML=submitButton.dataset.originalHtml;
+        form.classList.remove('sending');
+      });
   });
 })();
 </script>
