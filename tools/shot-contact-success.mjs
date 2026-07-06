@@ -15,8 +15,8 @@ await page.evaluate(async () => {
   // Simulate mailto-fallback success
   const form = document.getElementById('contactForm');
   const success = document.getElementById('formSuccess');
-  success.querySelector('.succ-title').textContent = 'Your email app should be opening.';
-  success.querySelector('.succ-sub').innerHTML = 'If it didn\'t, email <a href="mailto:lucia@konar.studio">lucia@konar.studio</a> directly.';
+  success.querySelector('.succ-title').textContent = 'Thanks — landed in my inbox.';
+  success.querySelector('.succ-sub').innerHTML = 'I\'ll reply within one working day. Meanwhile, I post store teardowns on <a href="https://www.tiktok.com/@luuciiaap" target="_blank" rel="noopener noreferrer">TikTok @luuciiaap →</a>';
   form.style.display = 'none';
   success.classList.add('show', 'in');
 });
