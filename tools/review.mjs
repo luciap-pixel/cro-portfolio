@@ -57,7 +57,7 @@ await page.waitForTimeout(2500);
 
 // Force all reveals in for the full-page shot so we can see the whole layout
 await page.evaluate(() => {
-  document.querySelectorAll('.reveal, [data-lm]').forEach((el) => el.classList.add('is-in'));
+  document.querySelectorAll('.reveal, [data-lm]').forEach((el) => { el.classList.add('is-in'); el.classList.add('in'); });
 });
 await page.waitForTimeout(1400);
 
@@ -75,7 +75,7 @@ await mpage.goto('http://127.0.0.1:4322/index.html', { waitUntil: 'networkidle' 
 try { await mpage.evaluate(() => document.fonts && document.fonts.ready); } catch {}
 await mpage.waitForTimeout(1500);
 await mpage.evaluate(() => {
-  document.querySelectorAll('.reveal, [data-lm]').forEach((el) => el.classList.add('is-in'));
+  document.querySelectorAll('.reveal, [data-lm]').forEach((el) => { el.classList.add('is-in'); el.classList.add('in'); });
 });
 await mpage.waitForTimeout(1000);
 await mpage.screenshot({ path: path.join(OUT, 'home-mobile.png'), fullPage: true });
