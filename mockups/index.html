@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Konar Studio — Mockup Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F2EC; --surface:#FFFFFF; --ink:#15140F; --ink-soft:#3B3934; --muted:#68655D;
+  --line:rgba(21,20,15,.12); --line-2:rgba(21,20,15,.07);
+  --accent:#2540FF; --accent-ink:#1B2FCC;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --container:1360px; --pad:clamp(24px,5vw,72px);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:"Inter",system-ui,sans-serif;
+  font-size:17px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 var(--pad)}
+
+header.top{padding:56px 0 40px;border-bottom:1px solid var(--line-2)}
+.brand{
+  font-family:"Space Mono",monospace;font-size:.85rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:18px;display:block;
+}
+h1{
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:600;
+  font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.02;letter-spacing:-.025em;
+  margin:0 0 12px;max-width:22ch;
+}
+.sub{color:var(--muted);font-size:1rem;margin:0}
+.pill{
+  display:inline-block;margin-top:14px;
+  font-family:"Space Mono",monospace;font-size:.72rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent-ink);
+  background:rgba(37,64,255,.08);border:1px solid rgba(37,64,255,.18);
+  padding:6px 12px;border-radius:100px;
+}
+
+main{padding:44px 0 96px}
+.grid{
+  display:grid;gap:28px;
+  grid-template-columns:repeat(auto-fill,minmax(360px,1fr));
+}
+.card{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:16px;overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .2s;
+  position:relative;
+}
+.card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(37,64,255,.28);
+  box-shadow:0 18px 40px -20px rgba(21,20,15,.18);
+}
+
+.thumb{
+  position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;
+  background:linear-gradient(180deg,#eeece5,#e4e1d8);
+  border-bottom:1px solid var(--line-2);
+}
+.thumb iframe{
+  position:absolute;top:0;left:0;
+  width:1440px;height:900px;border:0;
+  transform-origin:0 0;
+  pointer-events:none;
+  background:#fff;
+}
+.thumb .cb{
+  position:absolute;top:0;left:0;right:0;z-index:2;
+  height:26px;background:rgba(255,255,255,.9);
+  backdrop-filter:blur(6px);
+  display:flex;align-items:center;gap:6px;
+  padding:0 12px;border-bottom:1px solid var(--line-2);
+  font-family:"Space Mono",monospace;font-size:.68rem;color:var(--muted);
+}
+.thumb .cb i{width:8px;height:8px;border-radius:50%;background:#d9d5cb;display:inline-block}
+.thumb .cb i:nth-child(1){background:#f28a80}
+.thumb .cb i:nth-child(2){background:#f7c46b}
+.thumb .cb i:nth-child(3){background:#88c58f}
+.thumb .cb span{margin-left:6px}
+
+.meta{padding:22px 22px 24px;display:flex;flex-direction:column;gap:8px}
+.meta .row{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.meta h3{
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:600;
+  font-size:1.35rem;letter-spacing:-.015em;margin:0;line-height:1.15;
+}
+.meta .no{
+  font-family:"Space Mono",monospace;font-size:.72rem;letter-spacing:.14em;
+  color:var(--muted);text-transform:uppercase;
+}
+.meta .tag{
+  font-family:"Space Mono",monospace;font-size:.72rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--accent-ink);margin-top:2px;
+}
+.meta .desc{color:var(--muted);font-size:.95rem;margin:2px 0 0}
+.meta .view{
+  margin-top:14px;display:inline-flex;align-items:center;gap:6px;
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:.95rem;
+  color:var(--accent);
+}
+.card:hover .view .arw{transform:translateX(3px)}
+.view .arw{transition:transform .25s var(--ease)}
+
+footer{
+  padding:32px 0 56px;border-top:1px solid var(--line-2);
+  color:var(--muted);font-family:"Space Mono",monospace;font-size:.75rem;
+  letter-spacing:.12em;text-transform:uppercase;
+}
+
+@media (max-width:640px){
+  header.top{padding:36px 0 28px}
+  main{padding:28px 0 64px}
+  .grid{grid-template-columns:1fr;gap:20px}
+  .meta{padding:18px 18px 20px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="brand">Konar Studio</span>
+    <h1>Mockup Library</h1>
+    <p class="sub">Working gallery. Not the public portfolio.</p>
+    <span class="pill">Internal — 6 mockups</span>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="grid" id="grid">
+
+      <a class="card" href="/cro-portfolio/konk-furniture/" target="_blank" rel="noopener">
+        <div class="thumb">
+          <div class="cb"><i></i><i></i><i></i><span>konk.co.uk</span></div>
+          <iframe src="../konk-furniture/" loading="lazy" tabindex="-1" aria-hidden="true" title="Konk preview"></iframe>
+        </div>
+        <div class="meta">
+          <div class="row"><h3>Konk</h3><span class="no">01</span></div>
+          <span class="tag">Solid-wood furniture</span>
+          <p class="desc">konk.co.uk — made-to-order furniture rebuilt around trust and a clearer path to the basket.</p>
+          <span class="view">Open live <span class="arw">→</span></span>
+        </div>
+      </a>
+
+      <a class="card" href="/cro-portfolio/sandgrain/" target="_blank" rel="noopener">
+        <div class="thumb">
+          <div class="cb"><i></i><i></i><i></i><span>sandandgrain.co.uk</span></div>
+          <iframe src="../sandgrain/" loading="lazy" tabindex="-1" aria-hidden="true" title="Sand & Grain preview"></iframe>
+        </div>
+        <div class="meta">
+          <div class="row"><h3>Sand &amp; Grain</h3><span class="no">02</span></div>
+          <span class="tag">Bespoke woodwork</span>
+          <p class="desc">sandandgrain.co.uk — handmade furniture, restructured so the craft does the selling.</p>
+          <span class="view">Open live <span class="arw">→</span></span>
+        </div>
+      </a>
+
+      <a class="card" href="/cro-portfolio/WoodchesterCabinetMakers/" target="_blank" rel="noopener">
+        <div class="thumb">
+          <div class="cb"><i></i><i></i><i></i><span>woodchestercabinetmakers.co.uk</span></div>
+          <iframe src="../WoodchesterCabinetMakers/" loading="lazy" tabindex="-1" aria-hidden="true" title="Woodchester Cabinet Makers preview"></iframe>
+        </div>
+        <div class="meta">
+          <div class="row"><h3>Woodchester Cabinet Makers</h3><span class="no">03</span></div>
+          <span class="tag">Bespoke kitchens</span>
+          <p class="desc">woodchestercabinetmakers.co.uk — high-value kitchens, redesigned to book design consultations.</p>
+          <span class="view">Open live <span class="arw">→</span></span>
+        </div>
+      </a>
+
+      <a class="card" href="/cro-portfolio/RUCIUK/" target="_blank" rel="noopener">
+        <div class="thumb">
+          <div class="cb"><i></i><i></i><i></i><span>ruci — redesign</span></div>
+          <iframe src="../RUCIUK/" loading="lazy" tabindex="-1" aria-hidden="true" title="RUCI preview"></iframe>
+        </div>
+        <div class="meta">
+          <div class="row"><h3>RUCI</h3><span class="no">04</span></div>
+          <span class="tag">Subscription &amp; lifestyle</span>
+          <p class="desc">ruci — concept redesign focused on converting on the first visit.</p>
+          <span class="view">Open live <span class="arw">→</span></span>
+        </div>
+      </a>
+
+      <a class="card" href="/cro-portfolio/bespoke-carpentry/" target="_blank" rel="noopener">
+        <div class="thumb">
+          <div class="cb"><i></i><i></i><i></i><span>handmade-furniture.co.uk</span></div>
+          <iframe src="../bespoke-carpentry/" loading="lazy" tabindex="-1" aria-hidden="true" title="The Bespoke Carpentry Co preview"></iframe>
+        </div>
+        <div class="meta">
+          <div class="row"><h3>The Bespoke Carpentry Co</h3><span class="no">05</span></div>
+          <span class="tag">Live-edge dining tables</span>
+          <p class="desc">handmade-furniture.co.uk — product page rebuilt around social proof and a confident path to basket.</p>
+          <span class="view">Open live <span class="arw">→</span></span>
+        </div>
+      </a>
+
+      <a class="card" href="/cro-portfolio/sisterly-elevator/" target="_blank" rel="noopener">
+        <div class="thumb">
+          <div class="cb"><i></i><i></i><i></i><span>sisterlylab.com</span></div>
+          <iframe src="../sisterly-elevator/" loading="lazy" tabindex="-1" aria-hidden="true" title="SISTERLY preview"></iframe>
+        </div>
+        <div class="meta">
+          <div class="row"><h3>SISTERLY</h3><span class="no">06</span></div>
+          <span class="tag">Women's daily multivitamin</span>
+          <p class="desc">sisterlylab.com — The Elevator: category-entry page built to convert the daily habit.</p>
+          <span class="view">Open live <span class="arw">→</span></span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">Konar Studio — private working gallery</div>
+</footer>
+
+<script>
+  // Scale each iframe thumbnail to fit its container width, treating the frame as a 1440-wide viewport.
+  const IFRAME_W = 1440;
+  function fitThumbs(){
+    document.querySelectorAll('.thumb').forEach(t=>{
+      const iframe = t.querySelector('iframe');
+      if(!iframe) return;
+      const w = t.clientWidth;
+      const scale = w / IFRAME_W;
+      iframe.style.transform = `scale(${scale})`;
+      // iframe height set to match container height at inverse scale so it fills.
+      iframe.style.height = (t.clientHeight / scale) + 'px';
+      iframe.style.width  = IFRAME_W + 'px';
+    });
+  }
+  window.addEventListener('load', fitThumbs);
+  window.addEventListener('resize', fitThumbs);
+  // Re-fit shortly after load in case fonts change layout.
+  setTimeout(fitThumbs, 300);
+</script>
+
+</body>
+</html>

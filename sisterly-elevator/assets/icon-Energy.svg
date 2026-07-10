@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60 60">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: none;
+      }
+
+      .cls-3 {
+        fill: #231f20;
+      }
+
+      .cls-2 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-1" x="2.43" y="15.68" width="55.13" height="28.63"/>
+    </clipPath>
+  </defs>
+  <g id="Group_23356" data-name="Group 23356">
+    <g class="cls-2">
+      <g id="Group_23355" data-name="Group 23355">
+        <path id="Path_6131" data-name="Path 6131" class="cls-3" d="m57.1,24.53h-6.53v-8.38c0-.25-.2-.46-.45-.46,0,0,0,0,0,0H2.9c-.25,0-.46.2-.46.46,0,0,0,0,0,0v27.72c0,.25.21.46.46.46h47.21c.25,0,.46-.2.46-.46v-8.39h6.53c.25,0,.46-.2.46-.46v-10.01c0-.26-.21-.46-.46-.46m-7.46,18.87H3.36v-26.79h46.29v26.79Zm6.99-8.86h-6.07v-9.08h6.07v9.08Z"/>
+        <path id="Path_6132" data-name="Path 6132" class="cls-3" d="m24.95,19.57c-.09-.09-.2-.14-.33-.14h-7.02c-.25,0-.46.2-.46.46v20.21c0,.26.21.46.46.46h7.02c.26,0,.46-.21.46-.46v-20.21c0-.12-.05-.24-.13-.33m-.78,20.08h-6.11v-19.29h6.1v19.29Z"/>
+        <path id="Path_6133" data-name="Path 6133" class="cls-3" d="m13.85,19.44h-7.03c-.25,0-.46.21-.46.46,0,0,0,0,0,0v20.21c0,.25.21.46.46.46h7.02c.26,0,.46-.21.46-.46h0v-20.21c0-.25-.2-.46-.45-.46,0,0,0,0,0,0m-.46,20.21h-6.1v-19.28h6.1v19.28Z"/>
+      </g>
+    </g>
+  </g>
+  <rect class="cls-1" x="-32.32" y="57.68" width="124.63" height="124.63"/>
+</svg>
