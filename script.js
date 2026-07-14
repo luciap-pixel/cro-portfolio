@@ -9,7 +9,6 @@
      5. Before/After slider (pointer + keyboard)
      6. Custom cursor + cursor-follow glow
      7. Magnetic buttons
-     8. Teardown pre-fill + Formspree submit UX
    Everything degrades gracefully under prefers-reduced-motion
    and on touch devices.
    ========================================================= */
@@ -374,69 +373,5 @@
       });
     });
   }
-
-  /* =============================================================
-     8. Teardown pre-fill + Formspree submit UX
-  ============================================================= */
-  (function initForm() {
-    const form = document.getElementById('contactForm');
-    const status = document.getElementById('cformStatus');
-    if (!form || !status) return;
-
-    // Pre-fill message when [data-prefill] link is clicked
-    document.querySelectorAll('[data-prefill]').forEach((a) => {
-      a.addEventListener('click', () => {
-        const msg = form.querySelector('textarea[name="message"]');
-        if (msg && !msg.value.trim()) msg.value = a.getAttribute('data-prefill');
-      });
-    });
-
-    form.addEventListener('submit', async (e) => {
-      // If the endpoint is still the placeholder, fall back to mailto:
-      const endpoint = form.getAttribute('action') || '';
-      if (endpoint.includes('YOUR_FORM_ID')) {
-        e.preventDefault();
-        const fd = new FormData(form);
-        const subject = 'Konar Studio — enquiry';
-        const body =
-          `Name: ${fd.get('name') || ''}\n` +
-          `Email: ${fd.get('email') || ''}\n` +
-          `URL: ${fd.get('url') || ''}\n\n` +
-          `${fd.get('message') || ''}`;
-        window.location.href =
-          `mailto:lucia@konar.studio?subject=${encodeURIComponent(subject)}` +
-          `&body=${encodeURIComponent(body)}`;
-        status.textContent = 'Opening your email client…';
-        return;
-      }
-
-      // AJAX submit to Formspree
-      e.preventDefault();
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-      form.classList.remove('is-error');
-      status.textContent = 'Sending…';
-
-      try {
-        const res = await fetch(endpoint, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { Accept: 'application/json' },
-        });
-        if (res.ok) {
-          form.classList.add('is-sent');
-          status.textContent = "Thanks — I'll reply within one working day.";
-        } else {
-          form.classList.add('is-error');
-          status.textContent = "Couldn't send just now. Please email lucia@konar.studio instead.";
-        }
-      } catch {
-        form.classList.add('is-error');
-        status.textContent = "Couldn't send just now. Please email lucia@konar.studio instead.";
-      }
-    });
-  })();
 
 })();

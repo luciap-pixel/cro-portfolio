@@ -14,7 +14,7 @@ await page.evaluate(async () => {
   const s = document.getElementById('formStatus');
   s.className = 'form-status show success';
   s.querySelector('.ttl').textContent = 'Message sent — thank you.';
-  s.querySelector('.msg').textContent = 'I usually reply within one working day. Keep an eye on your inbox for a note from lucia@konar.studio.';
+  s.querySelector('.msg').textContent = 'I usually reply within one working day. Keep an eye on your inbox for a note from 10lucia.pag@gmail.com.';
 });
 await page.addStyleTag({ content: '*,*::before,*::after{animation-play-state:paused!important;transition:none!important}' });
 await page.evaluate(() => {
