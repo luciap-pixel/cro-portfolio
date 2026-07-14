@@ -813,7 +813,7 @@ footer{background:color-mix(in srgb,var(--bg) 70%,#fff);border-top:1px solid var
         </a>
         <div class="or-divider"><span>OR</span></div>
         -->
-        <form id="contactForm" action="https://formsubmit.co/10lucia.pag@gmail.com" method="POST" novalidate>
+        <form id="contactForm" action="https://formsubmit.co/ajax/10lucia.pag@gmail.com" method="POST" novalidate>
           <input type="hidden" name="_subject" value="New enquiry — Konar Studio">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_captcha" value="false">
@@ -1126,7 +1126,7 @@ document.querySelectorAll('[data-prefill="teardown"]').forEach(b=>b.addEventList
     try{ parent.scrollIntoView({behavior:reduce?'auto':'smooth',block:'nearest'}); }catch(_){}
   };
   const showError=()=>{
-    errBox.innerHTML='Something went wrong. Please email <a href="mailto:lucia@konar.studio">lucia@konar.studio</a> directly.';
+    errBox.textContent='Something went wrong. Please try again, or reach me on LinkedIn.';
     errBox.classList.add('show');
   };
 
