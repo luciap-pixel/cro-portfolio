@@ -400,7 +400,17 @@ section{padding-block:var(--sp-lg);position:relative}
 .contact-h2 em{font-style:normal;color:var(--accent)}
 .contact .sub{margin-top:1.2rem;color:var(--ink-soft);font-size:var(--fs-lead);line-height:1.55;max-width:44ch}
 
-.contact-stack{list-style:none;padding:0;margin:2.2rem 0 0;display:flex;flex-direction:column}
+/* direct-contact button pair */
+.contact-actions{display:grid;grid-template-columns:1fr;gap:.75rem;margin-top:2.2rem}
+@media(min-width:560px){.contact-actions{grid-template-columns:1fr 1fr;gap:1rem}}
+.contact-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.65rem;width:100%;background:var(--accent);color:#fff;padding:1rem 1.25rem;border-radius:14px;min-height:58px;font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:-.005em;text-decoration:none;border:1.5px solid var(--accent);line-height:1;transition:background .25s var(--ease),border-color .25s,transform .18s ease,box-shadow .25s var(--ease)}
+.contact-btn:hover{background:var(--accent-ink);border-color:var(--accent-ink);transform:translateY(-1px);box-shadow:0 18px 34px -16px rgba(37,64,255,.42)}
+.contact-btn:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:14px}
+.contact-btn .cb-ic{width:20px;height:20px;flex:0 0 auto;display:inline-block}
+.contact-btn .cb-ic svg{width:100%;height:100%;display:block;fill:currentColor}
+@media(prefers-reduced-motion:reduce){.contact-btn:hover{transform:none}}
+
+.contact-stack{list-style:none;padding:0;margin:1.6rem 0 0;display:flex;flex-direction:column}
 .contact-stack li{border-bottom:1px solid rgba(21,20,15,.10);transition:background .25s var(--ease)}
 .contact-stack li:first-child{border-top:1px solid rgba(21,20,15,.10)}
 .contact-stack a{position:relative;display:grid;grid-template-columns:110px 1fr auto;gap:1rem;align-items:center;padding:.95rem .75rem;min-height:56px;text-decoration:none;color:inherit;transition:padding .25s var(--ease)}
@@ -780,8 +790,17 @@ footer{background:color-mix(in srgb,var(--bg) 70%,#fff);border-top:1px solid var
         <span class="mono contact-eyebrow">Contact</span>
         <h2 class="contact-h2">Let's turn your traffic <em>into revenue.</em></h2>
         <p class="sub">Send me the page you're paying to send traffic to, and I'll tell you where I'd start. No pitch, just a straight read.</p>
+        <div class="contact-actions">
+          <a class="contact-btn" href="https://wa.me/447513497082?text=Hi%20Lucia%2C%20I%20found%20you%20through%20konar.studio" target="_blank" rel="noopener" aria-label="Message Lucia on WhatsApp">
+            <span class="cb-ic" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.97L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.86 9.86 0 0 0 12.04 2Zm0 18.13c-1.48 0-2.94-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.37c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.23 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.7-.8-.23-.09-.4-.13-.56.13-.17.25-.64.8-.79.97-.14.16-.29.19-.54.06-.25-.12-1.05-.39-2-1.24a7.5 7.5 0 0 1-1.38-1.72c-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.84-.2-.49-.41-.43-.56-.43l-.48-.01a.93.93 0 0 0-.67.31c-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.02 2.57.13.17 1.76 2.68 4.26 3.76.6.26 1.06.41 1.42.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.11-.23-.17-.48-.29Z"/></svg></span>
+            <span>WhatsApp me</span>
+          </a>
+          <a class="contact-btn" href="mailto:lucia@konar.studio?subject=Enquiry%20from%20konar.studio" aria-label="Email Lucia">
+            <span class="cb-ic" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 5h17A1.5 1.5 0 0 1 22 6.5v11a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 17.5v-11A1.5 1.5 0 0 1 3.5 5Zm0 1.5v.36l8.5 5.31 8.5-5.31V6.5h-17Zm17 2.13-8.1 5.06a.75.75 0 0 1-.8 0L3.5 8.63v8.87h17V8.63Z"/></svg></span>
+            <span>Email us</span>
+          </a>
+        </div>
         <ul class="contact-stack">
-          <li><a href="mailto:10lucia.pag@gmail.com"><span class="lb">Email</span><span class="val">10lucia.pag@gmail.com</span><span class="arw">→</span></a></li>
           <li><a href="https://www.linkedin.com/in/lucia-pagano-8161a72b7/" target="_blank" rel="noopener noreferrer"><span class="lb">LinkedIn</span><span class="val">lucia-pagano</span><span class="arw">→</span></a></li>
           <li><a href="https://www.tiktok.com/@luuciiaap" target="_blank" rel="noopener noreferrer"><span class="lb">TikTok</span><span class="val">@luuciiaap</span><span class="arw">→</span></a></li>
         </ul>
@@ -802,7 +821,7 @@ footer{background:color-mix(in srgb,var(--bg) 70%,#fff);border-top:1px solid var
       <div class="foot-col">
         <h4>Get in touch</h4>
         <ul>
-          <li><a href="mailto:10lucia.pag@gmail.com">10lucia.pag@gmail.com <span class="arw">→</span></a></li>
+          <li><a href="mailto:lucia@konar.studio?subject=Enquiry%20from%20konar.studio">lucia@konar.studio <span class="arw">→</span></a></li>
           <li><a href="https://www.linkedin.com/in/lucia-pagano-8161a72b7/" target="_blank" rel="noopener">LinkedIn lucia-pagano <span class="arw">→</span></a></li>
           <li><a href="https://www.tiktok.com/@luuciiaap" target="_blank" rel="noopener">TikTok @luuciiaap <span class="arw">→</span></a></li>
           <li><a href="#contact">Get a free teardown <span class="arw">→</span></a></li>
