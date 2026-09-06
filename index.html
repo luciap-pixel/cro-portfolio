@@ -1,1050 +1,605 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="theme-color" content="#F4F2EC" />
-<title>Lucia Pagano: web design, development and conversion</title>
-<meta name="description" content="Lucia Pagano. I design and build websites from top to bottom, and fix existing sites that are losing sales, so more of your traffic turns into revenue." />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Konar Studio, websites that turn traffic into customers</title>
+<meta name="description" content="Conversion focused web design and development by Jarek and Lucia. We build new sites and rebuild the pages where visitors slip away, so the traffic you already pay for turns into real enquiries and sales.">
+<meta name="theme-color" content="#F4F2EC">
+<link rel="canonical" href="https://konar.studio/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Konar Studio">
+<meta property="og:url" content="https://konar.studio/">
+<meta property="og:title" content="Konar Studio, websites that turn traffic into customers">
+<meta property="og:description" content="Conversion focused web design and development by Jarek and Lucia. We build new sites and rebuild the pages where visitors slip away, so the traffic you already pay for turns into real enquiries and sales.">
+<meta property="og:image" content="https://konar.studio/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Konar Studio, websites that turn traffic into customers">
+<meta name="twitter:description" content="Conversion focused web design and development by Jarek and Lucia. We build new sites and rebuild the pages where visitors slip away, so the traffic you already pay for turns into real enquiries and sales.">
+<meta name="twitter:image" content="https://konar.studio/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#F4F2EC; --surface:#FFFFFF; --ink:#15140F; --ink-soft:#3B3934; --muted:#68655D;
-  --line:rgba(21,20,15,.12); --line-2:rgba(21,20,15,.07);
-  --accent:#2540FF; --accent-ink:#1B2FCC;
-  --accent-soft:rgba(37,64,255,.08);
-  --accent-glow:rgba(37,64,255,.12);
-  --warm:rgba(247,196,140,.14);
-  --dark:#0F0F13;
-  --container-max:1360px;
-  --gutter-x:clamp(24px,5vw,96px);
-  --container:1360px; --pad:var(--gutter-x); /* legacy aliases */
-  --ease:cubic-bezier(.22,1,.36,1);
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
 
-  /* Type scale */
-  --fs-micro: .78rem;      /* ~12.5px — micro labels (nav status inner text, formnote) */
-  --fs-mono:  .85rem;      /* ~13.6px — uppercase mono labels/eyebrows */
-  --fs-mono-lg: .94rem;    /* ~15px — nav links */
-  --fs-small: .95rem;      /* ~15px — meta/caption body */
-  --fs-body:  1.0625rem;   /* ~17px — base body */
-  --fs-body-lg: 1.125rem;  /* ~18px — comfortable reading */
-  --fs-lead:  clamp(1.18rem,1.55vw,1.32rem); /* ~19–21px — lede paragraphs */
-  --fs-h3:    clamp(1.35rem,2.1vw,1.75rem);
-  --fs-h2:    clamp(2rem,3.9vw,2.85rem);
-  --fs-h1:    clamp(2.6rem,5.9vw,4.8rem);
-
-  /* Spacing scale */
-  --sp-lg: clamp(3.5rem,7vh,6rem);  /* section vertical */
-  --sp-md: clamp(2rem,4vh,3rem);
-  --sp-sm: clamp(1.25rem,2.5vh,2rem);
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--ink);
-  font-family:"Inter",system-ui,sans-serif;font-size:var(--fs-body);line-height:1.6;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative;
-}
-@media(min-width:900px){ body{ font-size:var(--fs-body-lg); } }
-@media(hover:hover) and (pointer:fine){
-  body.has-cursor{cursor:none}
-  body.has-cursor a,body.has-cursor button,body.has-cursor .btn,body.has-cursor .qa-q,body.has-cursor summary{cursor:pointer}
-  body.has-cursor input,body.has-cursor textarea{cursor:text}
-}
-a{color:inherit;text-decoration:none}
-img{display:block;max-width:100%}
-::selection{background:var(--accent);color:#fff}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
-.container{max-width:var(--container-max);margin-inline:auto;padding-inline:var(--gutter-x);position:relative}
-.mono{font-family:"Space Mono",monospace;text-transform:uppercase;letter-spacing:.14em;font-size:var(--fs-mono);color:var(--muted)}
-
-/* ---------- SVG-noise grain across whole page ---------- */
-.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.035;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-
-/* ---------- scoped ambient blobs (hero + contact only) ---------- */
-.fx{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-.fx .blob{position:absolute;border-radius:50%;filter:blur(90px);will-change:transform}
-.hero .fx .b1{width:52vw;height:52vw;left:-12vw;top:-14vw;background:radial-gradient(circle,var(--accent-glow),transparent 65%);animation:drift1 26s ease-in-out infinite alternate}
-.hero .fx .b2{width:44vw;height:44vw;right:-14vw;top:10vw;background:radial-gradient(circle,var(--warm),transparent 65%);animation:drift2 30s ease-in-out infinite alternate}
-.contact .fx .b1{width:42vw;height:42vw;left:-10vw;bottom:-16vw;background:radial-gradient(circle,rgba(37,64,255,.32),transparent 62%);animation:drift1 28s ease-in-out infinite alternate}
-.contact .fx .b2{width:32vw;height:32vw;right:-8vw;top:-10vw;background:radial-gradient(circle,rgba(247,196,140,.08),transparent 65%);animation:drift2 34s ease-in-out infinite alternate}
-@keyframes drift1{to{transform:translate(6vw,5vw) scale(1.12)}}
-@keyframes drift2{to{transform:translate(-5vw,7vw) scale(1.08)}}
-
-/* ---------- nav ---------- */
-.nav{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 60%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:background .3s var(--ease),backdrop-filter .3s,border-color .3s,box-shadow .3s}
-.nav.scrolled{background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom-color:var(--line-2);box-shadow:0 10px 30px -22px rgba(21,20,15,.18)}
-.nav .row{display:flex;align-items:center;justify-content:space-between;min-height:74px;gap:1.5rem}
-.brand{display:inline-flex;align-items:center;gap:10px;padding:.5rem 0}
-.brand .mark{width:11px;height:11px;border-radius:50%;background:var(--accent);flex:0 0 auto;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 14%,transparent);transition:transform .3s var(--ease)}
-.brand:hover .mark{transform:scale(1.15)}
-.brand b{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:1.2rem;letter-spacing:-.01em;white-space:nowrap;color:var(--ink)}
-.nav-links{display:flex;gap:clamp(1.75rem,2.3vw,2.25rem);align-items:center}
-.nav-links a{position:relative;font-family:"Space Mono",monospace;font-size:var(--fs-mono-lg);text-transform:uppercase;letter-spacing:.12em;color:var(--muted);padding:.9rem 0;transition:color .2s;min-height:48px;display:inline-flex;align-items:center;white-space:nowrap}
-.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:1.05rem;height:1.5px;background:var(--accent);transform:scaleX(0);transform-origin:left center;transition:transform .3s var(--ease)}
-.nav-links a:hover,.nav-links a.active{color:var(--ink)}
-.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
-.nav-right{display:flex;align-items:center;gap:1rem}
-.pill{display:inline-flex;align-items:center;gap:.6rem;font-family:"Space Mono",monospace;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);white-space:nowrap;padding:.5rem .9rem;background:color-mix(in srgb,var(--accent) 6%,transparent);border:1px solid color-mix(in srgb,var(--accent) 18%,transparent);border-radius:100px;margin-right:.5rem}
-.pill i{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(37,64,255,.5);animation:pulse 2.2s infinite;flex:0 0 auto}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,64,255,.45)}70%{box-shadow:0 0 0 8px rgba(37,64,255,0)}100%{box-shadow:0 0 0 0 rgba(37,64,255,0)}}
-
-/* ---------- buttons ---------- */
-.btn{position:relative;display:inline-flex;align-items:center;gap:.55rem;font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:1rem;padding:.85rem 1.4rem;border-radius:100px;border:1px solid var(--ink);cursor:pointer;overflow:hidden;isolation:isolate;background:transparent;color:var(--ink);transition:color .25s var(--ease),border-color .25s,transform .18s ease;line-height:1;white-space:nowrap}
-.btn::before{content:"";position:absolute;inset:0;z-index:-1;transform:scaleX(0);transform-origin:left center;transition:transform .42s var(--ease)}
-.btn:hover::before{transform:scaleX(1)}
-.btn .arw{transition:transform .28s var(--ease);display:inline-block}
-.btn:hover .arw{transform:translateX(5px)}
-.btn-solid{background:var(--accent);border-color:var(--accent);color:#fff}
-.btn-solid::before{background:var(--accent-ink);transform-origin:right center}
-.btn-solid:hover{border-color:var(--accent-ink);color:#fff}
-.btn-ghost{color:var(--ink)}
-.btn-ghost::before{background:var(--accent)}
-.btn-ghost:hover{color:#fff;border-color:var(--accent)}
-@media(max-width:1100px){.pill{display:none}}
-@media(max-width:960px){.nav-links{display:none}}
-
-/* ---------- hero ---------- */
-.hero{position:relative;z-index:0;overflow:hidden;min-height:min(88vh,860px);display:flex;flex-direction:column;padding-top:clamp(1.5rem,3.5vh,3rem);padding-bottom:clamp(1.5rem,3vh,2.5rem)}
-.hero > .container.hero-inner{flex:1;display:flex;align-items:center;z-index:2}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:2.5rem;align-items:center;width:100%}
-@media(min-width:1024px){.hero-grid{grid-template-columns:minmax(0,55fr) minmax(0,45fr);gap:clamp(2rem,4vw,4rem)}}
-.hero-content{max-width:620px;width:100%;padding-block:clamp(1rem,3vh,2rem)}
-@media(min-width:1024px){.hero-content{max-width:none}}
-.eyebrow{display:inline-flex;align-items:center;gap:.7rem;margin-bottom:1.9rem}
-.eyebrow::before{content:"";width:30px;height:1px;background:var(--accent)}
-h1.hero-title{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:var(--fs-h1);line-height:1.0;letter-spacing:-.015em;max-width:15ch;font-optical-sizing:auto;font-feature-settings:"kern" on}
-h1.hero-title .u{color:var(--accent-ink)}
-.lede{font-size:var(--fs-lead);line-height:1.55;color:var(--ink-soft);max-width:56ch;margin-top:1.9rem}
-.cta-row{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2.2rem}
-.cta-row .btn{min-height:48px}
-.stakes{display:flex;gap:.9rem;max-width:60ch;margin-top:2.4rem;color:var(--muted);font-size:var(--fs-body);line-height:1.55;font-style:italic}
-.stakes::before{content:"";flex:0 0 auto;width:3px;border-radius:3px;background:var(--accent);opacity:.55}
-.authority{position:relative;display:inline-flex;align-items:center;gap:.55rem;margin-top:1.5rem;font-family:"Space Mono",monospace;font-size:.92rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink);transition:color .25s;padding-bottom:3px}
-.authority::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform .35s var(--ease)}
-.authority:hover{color:var(--accent-ink)}
-.authority:hover::after{transform:scaleX(1)}
-.authority .arw{color:var(--accent);transition:transform .28s var(--ease)}
-.authority:hover .arw{transform:translateX(5px)}
-
-/* cursor-follow radial glow inside hero */
-.hero-glow{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .5s var(--ease);
-  background:radial-gradient(circle 800px at var(--mx,50%) var(--my,30%),rgba(37,64,255,.10),rgba(37,64,255,.03) 30%,transparent 62%)}
-.hero.glow-on .hero-glow{opacity:1}
-
-/* hero entry stagger — under 900ms total */
-.hero-content .anim{opacity:0;transform:translateY(20px);transition:opacity .55s var(--ease),transform .55s var(--ease);transition-delay:calc(var(--i,0) * 60ms)}
-.hero-content.in .anim{opacity:1;transform:none}
-
-/* ---------- hero collage (right column) ---------- */
-.hero-collage{position:relative;width:100%;min-height:460px;aspect-ratio:1/1;will-change:transform}
-@media(min-width:1024px){.hero-collage{aspect-ratio:auto;height:min(78vh,700px);min-height:600px}}
-@media(max-width:900px){.hero-collage{aspect-ratio:1/1;min-height:460px}}
-@media(max-width:600px){.hero-collage{min-height:400px;aspect-ratio:4/5}}
-
-/* aura trail behind collage */
-.hero-collage .aura{position:absolute;inset:-8%;z-index:0;pointer-events:none;filter:blur(50px);opacity:0;transition:opacity 1.4s ease}
-.hero-collage.in .aura{opacity:1}
-.hero-collage .aura span{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(37,64,255,.08),transparent 65%);will-change:transform}
-.hero-collage .aura .a1{width:70%;height:70%;top:-16%;left:-14%;animation:aura1 16s ease-in-out infinite}
-.hero-collage .aura .a2{width:64%;height:64%;bottom:-18%;right:-12%;background:radial-gradient(circle,rgba(247,196,140,.06),transparent 65%);animation:aura2 20s ease-in-out infinite -4s}
-.hero-collage .aura .a3{width:56%;height:56%;top:32%;left:22%;animation:aura3 14s ease-in-out infinite -6s}
-@keyframes aura1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(32px,22px) scale(1.05)}}
-@keyframes aura2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-28px,-32px) scale(.95)}}
-@keyframes aura3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(22px,38px) scale(1.03)}}
-
-/* collage cards */
-.ccard{position:absolute;display:block;z-index:2;opacity:0;transform:translateY(-30px);transition:opacity .5s var(--ease) calc(var(--i,0)*120ms),transform .5s var(--ease) calc(var(--i,0)*120ms);cursor:pointer;text-decoration:none;color:inherit}
-.hero-collage.in .ccard{opacity:1;transform:translateY(0)}
-.ccard-drift{transform-origin:center;will-change:transform}
-.ccard-inner{position:relative;display:block;border-radius:14px;border:1px solid color-mix(in srgb,var(--accent) 14%,transparent);background:var(--surface);overflow:hidden;box-shadow:0 34px 70px -22px rgba(37,64,255,.28),0 12px 28px -10px rgba(21,20,15,.14);transform-origin:center;will-change:transform;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
-.ccard .cb{display:flex;align-items:center;gap:.55rem;padding:.75rem .95rem;background:#fbfaf7;border-bottom:1px solid var(--line-2)}
-.ccard .cb i{width:10px;height:10px;border-radius:50%;background:var(--line);flex:0 0 auto}
-.ccard .cb i:first-child{background:var(--accent)}
-.ccard .cb span{font-family:"Space Mono",monospace;font-size:.72rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.02em}
-.ccard .cshot{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top center;display:block;background:#efeee9;-webkit-user-drag:none;user-drag:none}
-.ccard .view-lbl{position:absolute;top:11px;right:11px;padding:.32rem .62rem;background:var(--accent);color:#fff;font-family:"Space Mono",monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;border-radius:100px;opacity:0;transform:translateY(-6px);transition:opacity .3s var(--ease),transform .3s var(--ease);z-index:3;white-space:nowrap}
-.ccard:hover .view-lbl{opacity:1;transform:translateY(0)}
-.ccard:hover .ccard-drift{animation-play-state:paused}
-.ccard:hover .ccard-inner{transform:scale(1.045);box-shadow:0 44px 80px -22px rgba(37,64,255,.4),0 14px 30px -12px rgba(21,20,15,.22)}
-
-/* card positions + per-card drift — % widths keep overlap consistent across viewports */
-.c1{top:0%;left:0%;width:min(50%,300px)}
-.c2{top:4%;right:0%;width:min(55%,340px)}
-.c3{top:53%;left:2%;width:min(52%,320px)}
-.c4{top:58%;right:0%;width:min(52%,320px)}
-.c5{top:30%;left:26%;width:min(46%,270px);z-index:1}
-@media(max-width:900px){
-  .c1{width:min(52%,300px)}
-  .c2{width:min(56%,340px)}
-  .c3{width:min(54%,320px)}
-  .c4{width:min(54%,320px)}
-  .c5{width:min(48%,270px)}
-}
-@media(max-width:600px){
-  .c1{top:0%;left:0%;width:52%}
-  .c2{top:4%;right:0%;width:52%}
-  .c3{top:53%;left:0%;width:52%}
-  .c4{top:57%;right:0%;width:52%}
-  .c5{top:29%;left:24%;width:52%}
-}
-.c1 .ccard-drift{animation:drift1 7.5s ease-in-out infinite}
-.c2 .ccard-drift{animation:drift2 9s ease-in-out infinite -1s}
-.c3 .ccard-drift{animation:drift3 8.2s ease-in-out infinite -3.5s}
-.c4 .ccard-drift{animation:drift4 10s ease-in-out infinite -5s}
-.c5 .ccard-drift{animation:drift3 8.6s ease-in-out infinite -2s}
-@keyframes drift1{
-  0%,100%{transform:translateY(0) rotate(-3deg)}
-  50%{transform:translateY(-12px) rotate(-1.7deg)}
-}
-@keyframes drift2{
-  0%,100%{transform:translateY(0) rotate(4deg)}
-  33%{transform:translateY(8px) rotate(4.8deg)}
-  66%{transform:translateY(-6px) rotate(3.2deg)}
-}
-@keyframes drift3{
-  0%,100%{transform:translateY(0) rotate(-4.5deg)}
-  50%{transform:translateY(14px) rotate(-3.3deg)}
-}
-@keyframes drift4{
-  0%,100%{transform:translateY(0) rotate(3deg)}
-  40%{transform:translateY(-10px) rotate(4.2deg)}
-  70%{transform:translateY(6px) rotate(2deg)}
-}
-
-/* ---------- brand marquee with edge fade ---------- */
-.marq{border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2);padding-top:var(--sp-lg);padding-bottom:clamp(2rem,3.5vh,3rem);background:color-mix(in srgb,var(--bg) 65%,#fff);overflow:hidden}
-.marq .container{text-align:center}
-.marq .lbl{display:inline-block;margin-bottom:clamp(28px,3.5vw,56px)}
-.marq-track-wrap{width:100vw;overflow:hidden;position:relative;
-  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 clamp(48px,8vw,140px),#000 calc(100% - clamp(48px,8vw,140px)),transparent 100%);
-          mask-image:linear-gradient(to right,transparent 0,#000 clamp(48px,8vw,140px),#000 calc(100% - clamp(48px,8vw,140px)),transparent 100%);
-  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
-.marq .track{display:flex;align-items:center;gap:2.4rem;width:max-content;animation:scrollx 20s linear infinite;will-change:transform}
-@media(hover:hover){.marq-track-wrap:hover .track{animation-play-state:paused}}
-.marq .track span{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:clamp(1.4rem,2.8vw,2.15rem);letter-spacing:-.02em;color:var(--ink);white-space:nowrap;display:flex;align-items:center;line-height:1;padding-inline:.15em}
-.marq .track .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);padding:0;flex:0 0 auto}
-@keyframes scrollx{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
-
-/* ---------- section head ---------- */
-section{padding-block:var(--sp-lg);position:relative}
-.sec-head{max-width:760px;margin-bottom:clamp(2rem,3.5vh,3rem)}
-.sec-head .lbl{margin-bottom:.9rem}
-.sec-head h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:var(--fs-h2);letter-spacing:-.03em;line-height:1.02}
-.sec-head h2 em{font-style:normal;color:var(--accent)}
-.sec-head p{margin-top:1.05rem;color:var(--muted);font-size:var(--fs-lead);line-height:1.55;max-width:60ch}
-
-/* ---------- featured showcase ---------- */
-.feature{display:grid;grid-template-columns:1fr;gap:1.4rem}
-.showcase{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface);box-shadow:0 30px 70px -46px rgba(21,20,15,.55);display:block}
-.showcase .cb{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;border-bottom:1px solid var(--line-2);background:#fbfaf7}
-.showcase .cb i{width:9px;height:9px;border-radius:50%;background:var(--line)}
-.showcase .cb i:first-child{background:var(--accent)}
-.showcase .cb span{font-family:"Space Mono",monospace;font-size:.7rem;color:var(--muted)}
-.showcase .scroller{height:clamp(340px,52vh,560px);overflow:hidden;position:relative;background:#efeee9}
-.showcase .scroller img{width:100%;height:auto;position:absolute;top:0;left:0;transition:transform 8s cubic-bezier(.33,.1,.25,1)}
-.showcase:hover .scroller img{transform:translateY(var(--pan,0))}
-.feature-meta{display:flex;flex-direction:column;align-items:flex-start;gap:.4rem;max-width:56ch}
-.feature-meta h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:var(--fs-h3);letter-spacing:-.02em}
-.feature-meta p{color:var(--muted);font-size:var(--fs-body);line-height:1.55}
-.feature-meta .btn{margin-top:.85rem}
-
-/* ---------- work grid ---------- */
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.6rem,3vw,2.5rem)}
-@media(max-width:820px){.grid{grid-template-columns:1fr}}
-.card{display:block}
-.card .win{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface);aspect-ratio:4/5;box-shadow:0 18px 44px -30px rgba(21,20,15,.5);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
-.card .win .cb{position:absolute;top:0;left:0;right:0;z-index:2;display:flex;align-items:center;gap:.5rem;padding:.6rem .8rem;background:rgba(251,250,247,.94);border-bottom:1px solid var(--line-2);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
-.card .win .cb i{width:8px;height:8px;border-radius:50%;background:var(--line)}
-.card .win .cb i:first-child{background:var(--accent)}
-.card .win .cb span{font-family:"Space Mono",monospace;font-size:.65rem;color:var(--muted)}
-.card .win .shot{position:absolute;top:0;left:0;width:100%;height:auto;transition:transform 6s cubic-bezier(.33,.1,.25,1)}
-.card:hover .win{transform:translateY(-5px);box-shadow:0 30px 60px -34px rgba(21,20,15,.55)}
-.card .meta{padding-top:1.15rem}
-.card .meta .top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;border-top:1px solid var(--line);padding-top:1rem}
-.card .meta h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:var(--fs-h3);letter-spacing:-.02em}
-.card .meta .no{font-family:"Space Mono",monospace;font-size:.88rem;color:var(--muted)}
-.card .meta .tag{display:inline-flex;align-items:center;padding:.36rem .8rem;background:var(--accent-soft);color:var(--accent-ink);border-radius:100px;font-family:"Space Mono",monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;margin-top:.8rem}
-.card .meta .desc{margin-top:.75rem;color:var(--ink-soft);font-size:var(--fs-body);line-height:1.55;max-width:46ch}
-.card .meta .view{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.05rem;font-family:"Space Mono",monospace;font-size:.82rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink)}
-.card .meta .view .arw{color:var(--accent);transition:transform .28s var(--ease)}
-.card:hover .meta .view{color:var(--accent-ink)}
-.card:hover .meta .view .arw{transform:translateX(5px)}
-
-/* ---------- kinetic band (single readable phrase) ---------- */
-.kinetic{padding-block:clamp(2.8rem,5vh,4.5rem);overflow:hidden;position:relative;transform:rotate(-1.4deg);transform-origin:center}
-.kinetic-track-wrap{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
-.kinetic .track{display:flex;align-items:center;gap:1.5rem;width:max-content;animation:scrollx 40s linear infinite;will-change:transform}
-.kinetic:hover .track{animation-play-state:paused}
-.kinetic .track .phrase{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:clamp(2.6rem,7.5vw,6rem);letter-spacing:-.03em;white-space:nowrap;line-height:.95;display:inline-flex;align-items:center}
-.kinetic .track .phrase.solid{color:var(--ink)}
-.kinetic .track .phrase.out{-webkit-text-stroke:2.2px var(--accent);color:transparent}
-.kinetic .track .bullet{width:.16em;height:.16em;border-radius:50%;background:var(--accent);flex:0 0 auto;font-size:clamp(2.6rem,7.5vw,6rem)}
-
-/* ---------- Services (bento) ---------- */
-.svc-split{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(1.5rem,3.5vw,3rem)}
-@media(min-width:1024px){.svc-split{grid-template-columns:minmax(0,35fr) minmax(0,60fr);gap:clamp(2rem,4vw,4.5rem);align-items:start}}
-.svc-head{display:flex;flex-direction:column;gap:1.1rem}
-@media(min-width:1024px){.svc-head{position:sticky;top:110px}}
-.svc-h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:clamp(2.4rem,5.4vw,4.5rem);line-height:1.02;letter-spacing:-.03em;color:var(--ink)}
-.svc-h2 em{font-style:normal;color:var(--accent)}
-.svc-sub{color:var(--ink-soft);font-size:var(--fs-body-lg);line-height:1.55;max-width:34ch}
-.svc-grid{display:grid;grid-template-columns:1fr;gap:1rem}
-@media(min-width:640px){.svc-grid{grid-template-columns:1fr 1fr}}
-.svc-card{position:relative;display:flex;flex-direction:column;gap:.75rem;padding:clamp(1.5rem,2.6vw,2.1rem);border:1px solid rgba(21,20,15,.1);border-radius:14px;background:transparent;text-decoration:none;color:inherit;overflow:hidden;transition:background .35s var(--ease),border-color .35s var(--ease),transform .35s var(--ease),box-shadow .35s var(--ease);min-height:170px}
-.svc-card.svc-feat{grid-column:1/-1;border:1.5px solid var(--accent);background:color-mix(in srgb,var(--bg) 45%,#fff);min-height:0}
-.svc-card .no{font-family:"Space Mono",monospace;font-size:.82rem;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;transition:transform .35s var(--ease);transform-origin:left center;display:inline-block}
-.svc-card h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:clamp(1.4rem,2vw,1.75rem);letter-spacing:-.02em;color:var(--ink);line-height:1.15;transition:transform .35s var(--ease)}
-.svc-card.svc-feat h3{font-size:clamp(1.7rem,2.5vw,2.15rem)}
-.svc-card p{color:var(--ink-soft);font-size:.98rem;line-height:1.55;max-width:42ch;opacity:.92}
-.svc-card .svc-tag{margin-top:.15rem;font-family:"Space Mono",monospace;font-size:.72rem;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.4rem;font-weight:700}
-.svc-card .svc-arrow{position:absolute;bottom:1.2rem;right:1.4rem;font-family:"Space Mono",monospace;font-size:1.1rem;color:var(--accent);opacity:0;transform:translateX(-8px);transition:opacity .3s var(--ease),transform .3s var(--ease);line-height:1}
-@media(hover:hover) and (pointer:fine){
-  .svc-card:hover{background:color-mix(in srgb,var(--accent) 4%,transparent);border-color:color-mix(in srgb,var(--accent) 40%,transparent);transform:translateY(-3px);box-shadow:0 22px 40px -22px rgba(37,64,255,.28)}
-  .svc-card.svc-feat:hover{background:color-mix(in srgb,var(--accent) 6%,var(--bg))}
-  .svc-card:hover .no{transform:translateX(4px) scale(1.15)}
-  .svc-card:hover h3{transform:translateX(4px)}
-  .svc-card:hover .svc-arrow{opacity:1;transform:translateX(0)}
-}
-
-/* ---------- Who I work best with (editorial band) ---------- */
-#who{background:color-mix(in srgb,var(--accent) 3%,var(--bg));border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
-.who-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:2rem;align-items:start}
-@media(min-width:900px){.who-grid{grid-template-columns:minmax(0,40fr) minmax(0,55fr);gap:clamp(2rem,5vw,5rem)}}
-.who-l .lbl{margin-bottom:1.1rem;display:inline-block}
-.who-statement{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:clamp(2rem,3.9vw,3.1rem);line-height:1.05;letter-spacing:-.025em;color:var(--ink);max-width:14ch}
-.who-statement em{font-style:normal;color:var(--accent)}
-.who-checks{list-style:none;display:flex;flex-direction:column;gap:1rem;margin:0;padding:0}
-.who-checks li{display:flex;align-items:flex-start;gap:.85rem;font-size:var(--fs-body-lg);line-height:1.5;color:var(--ink);opacity:0;transform:translateY(10px);transition:opacity .55s var(--ease),transform .55s var(--ease);transition-delay:calc(var(--i,0) * 120ms)}
-.who-checks.in li{opacity:1;transform:none}
-.who-checks .chk{flex:0 0 auto;color:var(--accent);font-weight:700;font-size:1.15rem;line-height:1.3;margin-top:.05rem}
-.who-note{margin-top:1.6rem;font-size:var(--fs-body);color:var(--muted);font-style:italic}
-
-/* ---------- Process (horizontal 3-step flow) ---------- */
-.proc-h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:clamp(2.4rem,5.4vw,4.5rem);line-height:1.02;letter-spacing:-.03em}
-.proc-h2 em{font-style:normal;color:var(--accent)}
-.proc-flow{position:relative;display:grid;grid-template-columns:1fr;gap:1.25rem}
-@media(min-width:900px){.proc-flow{grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.25rem,2vw,2rem)}}
-.proc-line{display:none}
-@media(min-width:900px){
-  .proc-line{display:block;position:absolute;top:44px;left:8%;right:8%;height:1.5px;background:rgba(21,20,15,.09);z-index:0}
-  .proc-line-inner{position:absolute;left:0;top:0;height:100%;width:0;background:var(--accent);transition:width 1.2s var(--ease)}
-  .proc-flow.in .proc-line-inner{width:100%}
-}
-.proc-step{position:relative;padding:clamp(1.4rem,2.2vw,1.9rem);padding-top:clamp(2.2rem,3vw,3rem);border:1px solid rgba(21,20,15,.1);border-radius:14px;background:var(--bg);transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease);display:flex;flex-direction:column;gap:.6rem}
-.proc-dot{display:none}
-@media(min-width:900px){
-  .proc-dot{display:block;position:absolute;top:36px;left:50%;transform:translate(-50%,0) scale(0);width:16px;height:16px;border-radius:50%;background:var(--accent);z-index:2;box-shadow:0 0 0 6px var(--bg);transition:transform .35s var(--ease)}
-  .proc-flow.in .proc-step:nth-child(2) .proc-dot{transform:translate(-50%,0) scale(1);transition-delay:.18s}
-  .proc-flow.in .proc-step:nth-child(3) .proc-dot{transform:translate(-50%,0) scale(1);transition-delay:.6s}
-  .proc-flow.in .proc-step:nth-child(4) .proc-dot{transform:translate(-50%,0) scale(1);transition-delay:1s}
-}
-.proc-big{position:absolute;top:1.5rem;right:1.5rem;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:clamp(3.4rem,5.4vw,5rem);line-height:1;letter-spacing:-.03em;color:color-mix(in srgb,var(--accent) 18%,transparent);transition:color .35s var(--ease);pointer-events:none;user-select:none}
-@media(max-width:900px){.proc-big{position:relative;top:auto;right:auto;margin-bottom:.15rem}}
-.proc-step h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:clamp(1.3rem,1.9vw,1.65rem);letter-spacing:-.02em;color:var(--ink)}
-.proc-step p{color:var(--ink-soft);font-size:var(--fs-body);line-height:1.55;max-width:42ch}
-.proc-outcome{display:block;margin-top:auto;padding-top:1rem;border-top:1px solid var(--line-2);font-family:"Space Mono",monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);font-weight:700}
-@media(hover:hover) and (pointer:fine){
-  .proc-step:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 35%,transparent);box-shadow:0 22px 40px -22px rgba(37,64,255,.22)}
-  .proc-step:hover .proc-big{color:color-mix(in srgb,var(--accent) 35%,transparent)}
-  .proc-step:hover .proc-dot{transform:translate(-50%,0) scale(1.4)}
-}
-@media(max-width:900px){
-  /* vertical line stub between stacked cards */
-  .proc-flow::before{content:"";position:absolute;left:32px;top:20px;bottom:20px;width:1.5px;background:rgba(21,20,15,.08);z-index:0}
-  .proc-step{padding-left:56px}
-  .proc-step::before{content:"";position:absolute;left:26px;top:34px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--bg);z-index:2}
-}
-
-/* ---------- teardown ---------- */
-.teardown{border:1px solid var(--line);border-radius:18px;background:var(--surface);padding:clamp(2rem,4.5vw,3.2rem);box-shadow:0 30px 70px -50px rgba(21,20,15,.5);position:relative;overflow:hidden}
-.teardown::after{content:"";position:absolute;right:-10%;top:-30%;width:40%;height:160%;background:radial-gradient(circle,rgba(37,64,255,.10),transparent 70%);pointer-events:none}
-.teardown h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:var(--fs-h2);letter-spacing:-.02em;line-height:1.05;max-width:20ch;position:relative;z-index:1}
-.teardown h2 .u{position:relative;white-space:nowrap;color:var(--accent-ink)}
-.teardown h2 .u::after{content:"";position:absolute;left:0;right:0;bottom:.02em;height:.09em;background:var(--accent);border-radius:2px}
-.teardown p{margin-top:1rem;color:var(--muted);font-size:var(--fs-lead);line-height:1.55;max-width:58ch;position:relative;z-index:1}
-.teardown .btn{margin-top:1.7rem;position:relative;z-index:1}
-
-/* ---------- FAQ ---------- */
-.faq{border-top:1px solid var(--line)}
-.qa{border-bottom:1px solid var(--line);position:relative}
-.qa::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent);transform:scaleY(0);transform-origin:top center;transition:transform .35s var(--ease)}
-.qa.open::before{transform:scaleY(1)}
-.qa-q{width:100%;background:none;border:0;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;padding:1.5rem 0 1.5rem 1.2rem;font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:clamp(1.18rem,1.9vw,1.4rem);letter-spacing:-.01em;color:inherit;transition:padding-left .3s var(--ease),color .2s}
-.qa.open .qa-q{padding-left:1.6rem}
-.qa-q:hover{color:var(--accent-ink)}
-.qa-q .ic{flex:0 0 auto;width:30px;height:30px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--accent);font-size:1.1rem;transition:transform .3s var(--ease),background .3s,color .3s,border-color .3s}
-.qa.open .qa-q .ic{transform:rotate(45deg);background:var(--accent);color:#fff;border-color:var(--accent)}
-.qa-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s var(--ease)}
-.qa.open .qa-a{grid-template-rows:1fr}
-.qa-a > div{overflow:hidden}
-.qa-a > div > p{padding:0 0 1.6rem 1.2rem;color:var(--muted);font-size:var(--fs-body-lg);line-height:1.6;max-width:66ch}
-
-/* ---------- contact (warm off-white) ---------- */
-.contact{position:relative;z-index:0;overflow:hidden;color:var(--ink);padding-block:clamp(4rem,8vh,6.5rem);
-  background:linear-gradient(to bottom,color-mix(in srgb,var(--accent) 4%,var(--bg)) 0%,var(--bg) 40%)}
-.contact .container{position:relative;z-index:1}
-.contact-noise{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.03;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)'/%3E%3C/svg%3E")}
-.contact .fx{z-index:0}
-.contact .fx .b1{width:56vw;height:56vw;left:-16vw;bottom:-22vw;background:radial-gradient(circle,rgba(37,64,255,.06),transparent 62%);filter:blur(110px);animation:drift1 24s ease-in-out infinite alternate}
-.contact .fx .b2{width:48vw;height:48vw;right:-14vw;top:-14vw;background:radial-gradient(circle,rgba(247,196,140,.10),transparent 62%);filter:blur(110px);animation:drift2 28s ease-in-out infinite alternate}
-
-.contact-grid{display:grid;grid-template-columns:1fr;gap:clamp(2.5rem,5vh,4rem);max-width:560px;margin-inline:auto}
-
-.contact-eyebrow{color:var(--accent);letter-spacing:.14em;display:inline-block}
-.contact-h2{margin-top:1.1rem;font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:clamp(2.4rem,4.6vw,3.6rem);line-height:1.02;letter-spacing:-.025em;color:var(--ink);max-width:14ch}
-.contact-h2 em{font-style:normal;color:var(--accent)}
-.contact .sub{margin-top:1.2rem;color:var(--ink-soft);font-size:var(--fs-lead);line-height:1.55;max-width:44ch}
-
-/* direct-contact button pair */
-.contact-actions{display:grid;grid-template-columns:1fr;gap:.75rem;margin-top:2.2rem}
-@media(min-width:560px){.contact-actions{grid-template-columns:1fr 1fr;gap:1rem}}
-.contact-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.65rem;width:100%;background:var(--accent);color:#fff;padding:1rem 1.25rem;border-radius:14px;min-height:58px;font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:-.005em;text-decoration:none;border:1.5px solid var(--accent);line-height:1;transition:background .25s var(--ease),border-color .25s,transform .18s ease,box-shadow .25s var(--ease)}
-.contact-btn:hover{background:var(--accent-ink);border-color:var(--accent-ink);transform:translateY(-1px);box-shadow:0 18px 34px -16px rgba(37,64,255,.42)}
-.contact-btn:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:14px}
-.contact-btn .cb-ic{width:20px;height:20px;flex:0 0 auto;display:inline-block}
-.contact-btn .cb-ic svg{width:100%;height:100%;display:block;fill:currentColor}
-@media(prefers-reduced-motion:reduce){.contact-btn:hover{transform:none}}
-
-.contact-stack{list-style:none;padding:0;margin:1.6rem 0 0;display:flex;flex-direction:column}
-.contact-stack li{border-bottom:1px solid rgba(21,20,15,.10);transition:background .25s var(--ease)}
-.contact-stack li:first-child{border-top:1px solid rgba(21,20,15,.10)}
-.contact-stack a{position:relative;display:grid;grid-template-columns:110px 1fr auto;gap:1rem;align-items:center;padding:.95rem .75rem;min-height:56px;text-decoration:none;color:inherit;transition:padding .25s var(--ease)}
-.contact-stack .lb{font-family:"Space Mono",monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.14em;color:rgba(37,64,255,.9);font-weight:400;white-space:nowrap;transition:color .25s var(--ease)}
-.contact-stack .val{position:relative;font-size:1rem;font-weight:500;color:var(--ink);font-family:"Inter",sans-serif;display:inline-block;line-height:1.35;transition:transform .25s var(--ease)}
-.contact-stack .arw{color:var(--accent);transition:transform .25s var(--ease);font-family:"Space Mono",monospace;font-size:1rem}
-@media(hover:hover) and (pointer:fine){
-  .contact-stack li:hover{background:color-mix(in srgb,var(--accent) 5%,transparent)}
-  .contact-stack li:hover .val{transform:translateX(4px)}
-  .contact-stack li:hover .arw{transform:translateX(4px)}
-  .contact-stack li:hover .lb{color:var(--accent)}
-}
-
-/* booking pill (styles defined even while HTML is commented — one-step enable) */
-.book-pill{display:flex;align-items:center;gap:.75rem;width:100%;background:var(--accent);color:#fff;padding:.85rem 1.25rem;border-radius:14px;min-height:52px;font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:1rem;text-decoration:none;justify-content:space-between;transition:background .25s var(--ease),transform .18s ease;margin-bottom:1.25rem}
-.book-pill:hover{background:var(--accent-ink);transform:scale(1.01)}
-.book-pill .book-ic{display:inline-flex;align-items:center;flex:0 0 auto}
-.book-pill .book-arw{font-size:1.05rem;transition:transform .25s var(--ease);flex:0 0 auto}
-.book-pill:hover .book-arw{transform:translate(3px,-3px)}
-.or-divider{position:relative;text-align:center;margin:0 0 1.3rem}
-.or-divider::before{content:"";position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(21,20,15,.14)}
-.or-divider span{position:relative;background:var(--bg);padding:0 .75rem;font-family:"Space Mono",monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
-
-/* form — warm off-white theme, static labels above inputs */
-.contact form{position:relative}
-.contact form .fld{margin-bottom:1.15rem}
-.contact form label{display:block;font-family:"Space Mono",monospace;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;font-weight:400;transition:color .2s var(--ease)}
-.contact form .fld:focus-within label{color:var(--accent-ink)}
-.contact form input,.contact form textarea{width:100%;background:#FFFFFF;border:1.5px solid rgba(21,20,15,.15);border-radius:12px;padding:16px 20px;color:var(--ink);font-family:"Inter",sans-serif;font-size:1rem;font-weight:500;line-height:1.4;box-shadow:0 1px 2px rgba(21,20,15,.04);transition:border-color .2s var(--ease),box-shadow .2s var(--ease),transform .2s var(--ease);transform-origin:left center}
-.contact form input::placeholder,.contact form textarea::placeholder{color:rgba(21,20,15,.6);font-family:"Inter",sans-serif;font-weight:400}
-.contact form input:focus,.contact form textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 15%,transparent);transform:scale(1.005)}
-.contact form input:focus-visible,.contact form textarea:focus-visible{outline:none}
-.contact form textarea{resize:vertical;min-height:160px}
-
-/* Name + Email side-by-side on desktop */
-.form-row-2{display:grid;grid-template-columns:1fr;gap:1.15rem;margin-bottom:1.15rem}
-@media(min-width:640px){.form-row-2{grid-template-columns:1fr 1fr}}
-.form-row-2 .fld{margin-bottom:0}
-
-/* Submit — cobalt with slow shimmer */
-.contact-send{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;width:100%;background:var(--accent);color:#fff;border:0;border-radius:12px;padding:16px 24px;min-height:56px;font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:1.05rem;cursor:pointer;line-height:1;overflow:hidden;isolation:isolate;transition:background .25s var(--ease),transform .18s ease,box-shadow .25s var(--ease);margin-top:.5rem}
-@media(min-width:640px){.contact-send{width:auto;min-width:260px}}
-.contact-send::before{display:none}
-.contact-send::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.16) 50%,transparent 70%);transform:translateX(-100%);pointer-events:none;animation:contact-shimmer 4s ease-in-out infinite;z-index:0}
-.contact-send > *{position:relative;z-index:1}
-@keyframes contact-shimmer{0%,15%{transform:translateX(-100%)}75%,100%{transform:translateX(100%)}}
-.contact-send .arw{color:#fff;transition:transform .25s var(--ease);display:inline-block;font-family:"Space Mono",monospace;font-size:1.05rem}
-.contact-send:hover{background:var(--accent-ink);box-shadow:0 16px 34px -14px rgba(37,64,255,.38)}
-.contact-send:hover .arw{transform:translateX(5px)}
-.contact-send:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
-@media(prefers-reduced-motion:reduce){.contact-send::after{animation:none;display:none}}
-form.sending .contact-send{opacity:.7;pointer-events:none}
-
-.form-error{display:none;margin-top:1rem;color:#ff9c9c;font-size:.94rem;line-height:1.5}
-.form-error.show{display:block}
-
-.form-success{display:none;padding:clamp(1.75rem,2.5vw,2.25rem);border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);background:#FFFFFF;border-radius:14px;text-align:center;opacity:0;transform:translateY(8px);transition:opacity .3s var(--ease),transform .3s var(--ease);box-shadow:0 30px 60px -30px rgba(37,64,255,.22),0 12px 24px -14px rgba(21,20,15,.06)}
-.form-success.show{display:block}
-.form-success.in{opacity:1;transform:none}
-.form-success .succ-check{display:inline-flex;align-items:center;justify-content:center;width:54px;height:54px;border-radius:50%;background:var(--accent);color:#fff;margin:0 auto 1rem}
-.form-success .succ-title{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:clamp(1.5rem,2vw,1.75rem);letter-spacing:-.015em;color:var(--ink);margin-bottom:.55rem;line-height:1.15;text-align:center}
-.form-success .succ-sub{font-size:1rem;color:var(--ink-soft);line-height:1.55;max-width:44ch;text-align:center;margin-inline:auto}
-.form-success .succ-sub a{color:var(--accent);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--accent) 40%,transparent);text-decoration-thickness:1px;text-underline-offset:3px;transition:text-decoration-color .25s var(--ease),color .2s;padding-bottom:1px}
-.form-success .succ-sub a:hover{color:var(--accent-ink);text-decoration-color:var(--accent);text-decoration-thickness:2px}
-@media(prefers-reduced-motion:reduce){.form-success{transition:none}}
-
-form.sending .contact-send{opacity:.7;pointer-events:none}
-
-/* ---------- footer ---------- */
-footer{background:color-mix(in srgb,var(--bg) 70%,#fff);border-top:1px solid var(--line-2);padding-block:clamp(2.5rem,5vh,4rem)}
-.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(1.5rem,3vw,3rem);align-items:start}
-@media(max-width:760px){.foot-grid{grid-template-columns:1fr;gap:2rem}}
-.foot-col h4{font-family:"Space Mono",monospace;font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:1rem;font-weight:400}
-.foot-brand b{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:1.4rem;letter-spacing:-.01em;color:var(--ink);display:block}
-.foot-brand .trading{display:block;margin-top:.35rem;font-size:.75rem;color:var(--muted)}
-.foot-brand .role{color:var(--muted);font-size:var(--fs-small);margin-top:.9rem;max-width:32ch;line-height:1.5}
-.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.65rem}
-.foot-col a{color:var(--ink-soft);font-size:var(--fs-small);transition:color .2s;display:inline-flex;align-items:center;gap:.4rem;padding:.15rem 0}
-.foot-col a:hover{color:var(--accent-ink)}
-.foot-col a .arw{color:var(--accent);transition:transform .25s var(--ease)}
-.foot-col a:hover .arw{transform:translateX(3px)}
-.foot-bottom{margin-top:clamp(2rem,3.5vh,3rem);padding-top:1.4rem;border-top:1px solid var(--line-2);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
-.foot-bottom .disc{color:var(--muted);font-size:.85rem;line-height:1.5;max-width:64ch}
-.foot-bottom .copy{color:var(--muted);font-size:.85rem;white-space:nowrap}
-
-/* ---------- mobile sticky cta ---------- */
-.mcta{display:none}
-@media(max-width:640px){
-  .mcta{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;padding:.7rem var(--gutter-x);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line)}
-  .mcta .btn{width:100%;justify-content:center}
-  body{padding-bottom:76px}
-}
-
-/* ---------- custom cursor (minimal — dot only) ---------- */
-.cursor-dot{position:fixed;top:0;left:0;z-index:95;pointer-events:none;width:10px;height:10px;border-radius:50%;background:var(--accent);will-change:transform,opacity;transition:opacity .2s ease,transform .18s var(--ease),background .18s;mix-blend-mode:normal}
-.cursor-dot.grow{transform-origin:center;background:rgba(37,64,255,.6)}
-.cursor-dot.hide{opacity:0}
-@media(hover:none){.cursor-dot{display:none!important}}
-
-/* ---------- reveal ---------- */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-.reveal.in{opacity:1;transform:none}
-.stagger > *{opacity:0;transform:translateY(20px);transition:opacity .65s var(--ease),transform .65s var(--ease);transition-delay:calc(var(--i,0) * 70ms)}
-.stagger.in > *{opacity:1;transform:none}
-
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
-  .reveal,.stagger>*,.hero-content .anim{opacity:1;transform:none}
-  .ccard{opacity:1!important;transform:none!important}
-  .ccard-drift,.hero-collage .aura span{animation:none!important}
-  .c1 .ccard-drift{transform:rotate(-3deg)}
-  .c2 .ccard-drift{transform:rotate(4deg)}
-  .c3 .ccard-drift{transform:rotate(-4.5deg)}
-  .c4 .ccard-drift{transform:rotate(3deg)}
-  .hero-collage .aura{opacity:.5}
-  .hero-collage{transform:none!important}
-  .showcase:hover .scroller img,.card:hover .win .shot{transform:none!important}
-  .kinetic{transform:none}
-  .fx,.hero-glow{display:none}
-  .cursor-dot{display:none!important}
-  .marq .track,.kinetic .track{animation:none!important}
-}
-</style>
 </head>
 <body>
+<div class="codebg" id="codebg" aria-hidden="true"></div>
 
-<div class="grain" aria-hidden="true"></div>
+<nav class="nav" id="nav">
+  <a href="#/" class="logo" data-link><b></b>Konar Studio</a>
+  <ul class="nlinks">
+    <li><a href="#/work" data-link>Work</a></li>
+    <li><a href="#/services" data-link>Services</a></li>
+    <li><a href="#/process" data-link>Process</a></li>
+    <li><a href="#/about" data-link>About</a></li>
+  </ul>
+  <div class="navr">
+    <a href="mailto:lucia@konar.studio" class="navmail">lucia@konar.studio</a>
+    <a href="#/contact" class="btn pop" data-link>Free teardown</a>
+    <button class="burger" id="burger" aria-label="Menu"><i></i><i></i></button>
+  </div>
+</nav>
 
-<!-- NAV -->
-<nav class="nav"><div class="container row">
-  <a href="#top" class="brand" aria-label="Lucia Pagano — Konar Studio, home"><span class="mark" aria-hidden="true"></span><b>Lucia Pagano</b></a>
-  <div class="nav-links">
-    <a href="#work">Work</a><a href="#services">Services</a><a href="#approach">Approach</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
-  </div>
-  <div class="nav-right">
-    <span class="pill"><i></i>Available for projects</span>
-    <a href="#contact" class="btn btn-solid mag">Start a project <span class="arw">→</span></a>
-  </div>
-</div></nav>
-
-<!-- HERO -->
-<header class="hero" id="top">
-  <div class="fx" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span></div>
-  <div class="hero-glow" aria-hidden="true"></div>
-  <div class="container hero-inner">
-    <div class="hero-grid">
-      <div class="hero-content" id="heroContent">
-        <span class="eyebrow mono anim" style="--i:0">Web design, development and conversion</span>
-        <h1 class="hero-title anim" style="--i:1">Your traffic is expensive. Your page <span class="u">shouldn't waste it.</span></h1>
-        <p class="lede anim" style="--i:2">I'm Lucia Pagano. I design and build websites from top to bottom, and I fix existing ones that are losing sales: the pages where visitors hesitate, leave, or never get in touch. Either way, more of the traffic you already pay for turns into revenue.</p>
-        <div class="cta-row anim" style="--i:3">
-          <a href="#contact" class="btn btn-solid mag">Start a project <span class="arw">→</span></a>
-          <a href="#work" class="btn btn-ghost mag">See the work</a>
-        </div>
-        <p class="stakes anim" style="--i:4">Every visitor who lands, hesitates, and leaves is money you've already spent. That hesitation is the most expensive thing on your website.</p>
-        <a href="https://www.tiktok.com/@luuciiaap" target="_blank" rel="noopener" class="authority anim" style="--i:5">I tear down real stores every week on TikTok <span class="arw">→</span></a>
-      </div>
-      <div class="hero-collage" id="collage" aria-label="Selected redesigns collage">
-        <div class="aura" aria-hidden="true"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
-        <a href="sisterly-elevator/" target="_blank" rel="noopener" class="ccard c1" style="--i:0">
-          <div class="ccard-drift"><div class="ccard-inner">
-            <div class="cb"><i></i><i></i><i></i><span>sisterlylab.com</span></div>
-            <img class="cshot" src="assets/work/sisterly.jpg" alt="SISTERLY — concept redesign" loading="eager">
-            <span class="view-lbl">View live →</span>
-          </div></div>
-        </a>
-        <a href="bespoke-carpentry/" target="_blank" rel="noopener" class="ccard c2" style="--i:1">
-          <div class="ccard-drift"><div class="ccard-inner">
-            <div class="cb"><i></i><i></i><i></i><span>handmade-furniture.co.uk</span></div>
-            <img class="cshot" src="assets/work/bespoke-carpentry.jpg" alt="The Bespoke Carpentry Co — concept redesign" loading="eager">
-            <span class="view-lbl">View live →</span>
-          </div></div>
-        </a>
-        <a href="WoodchesterCabinetMakers/" target="_blank" rel="noopener" class="ccard c3" style="--i:2">
-          <div class="ccard-drift"><div class="ccard-inner">
-            <div class="cb"><i></i><i></i><i></i><span>woodchestercabinetmakers.co.uk</span></div>
-            <img class="cshot" src="assets/work/woodchester.jpg" alt="Woodchester Cabinet Makers — concept redesign" loading="eager">
-            <span class="view-lbl">View live →</span>
-          </div></div>
-        </a>
-        <a href="RUCIUK/" target="_blank" rel="noopener" class="ccard c4" style="--i:3">
-          <div class="ccard-drift"><div class="ccard-inner">
-            <div class="cb"><i></i><i></i><i></i><span>ruci — redesign</span></div>
-            <img class="cshot" src="assets/work/ruci.jpg" alt="RUCI — concept redesign" loading="eager">
-            <span class="view-lbl">View live →</span>
-          </div></div>
-        </a>
-      </div>
-    </div>
-  </div>
-</header>
-
-<!-- BRAND MARQUEE -->
-<div class="marq"><div class="container"><span class="lbl mono">Redesigned on my own initiative</span></div>
-  <div class="marq-track-wrap">
-    <div class="track" id="brandTrack">
-      <span>SISTERLY</span><span class="dot"></span><span>Bespoke&nbsp;Carpentry&nbsp;Co</span><span class="dot"></span><span>Woodchester&nbsp;Cabinet&nbsp;Makers</span><span class="dot"></span><span>RUCI</span><span class="dot"></span>
-      <span>SISTERLY</span><span class="dot"></span><span>Bespoke&nbsp;Carpentry&nbsp;Co</span><span class="dot"></span><span>Woodchester&nbsp;Cabinet&nbsp;Makers</span><span class="dot"></span><span>RUCI</span><span class="dot"></span>
-    </div>
-  </div>
+<div class="mob" id="mob">
+  <a href="#/" data-link>Home</a><a href="#/work" data-link>Work</a><a href="#/services" data-link>Services</a>
+  <a href="#/process" data-link>Process</a><a href="#/about" data-link>About</a><a href="#/contact" data-link>Contact</a>
+  <p class="mm">lucia@konar.studio · TikTok @luuciiaap</p>
 </div>
 
-<!-- FEATURED -->
-<section id="featured"><div class="container">
-  <div class="sec-head reveal"><span class="lbl mono">Featured redesign</span><h2>See how it looks <em>in full.</em></h2><p>Hover to scroll through the complete redesigned page. The real build, top to bottom. Every one is clickable and live.</p></div>
-  <div class="feature reveal">
-    <a href="sisterly-elevator/" target="_blank" rel="noopener" class="showcase card-cursor">
-      <div class="cb"><i></i><i></i><i></i><span>sisterlylab.com — concept redesign by Konar Studio</span></div>
-      <div class="scroller"><img src="assets/work/sisterly.jpg" alt="Full SISTERLY concept redesign, scrolling top to bottom"></div>
-    </a>
-    <div class="feature-meta">
-      <h3>SISTERLY: Women's daily multivitamin</h3>
-      <p>A concept redesign that turns a cluttered subscription offer into one clear, confident path to subscribe, with real social proof at the decision point.</p>
-      <a href="sisterly-elevator/" target="_blank" rel="noopener" class="btn btn-ghost">Open the live page <span class="arw">→</span></a>
-    </div>
-  </div>
-</div></section>
+<!-- ============================ HOME -->
+<main class="page" id="p-home">
 
-<!-- WORK -->
-<section id="work"><div class="container">
-  <div class="sec-head reveal"><span class="lbl mono">Selected work</span><h2>Selected <em>work.</em></h2><p>Live concept redesigns of real UK brands, built to show how better UX could lift conversion. Hover any card to scroll the full page, click to open the live redesign.</p></div>
-  <div class="grid stagger">
-    <a href="sisterly-elevator/" target="_blank" rel="noopener" class="card card-cursor">
-      <div class="win"><div class="cb"><i></i><i></i><i></i><span>sisterlylab.com</span></div><img class="shot" src="assets/work/sisterly.jpg" alt="SISTERLY redesign" loading="lazy"></div>
-      <div class="meta"><div class="top"><h3>SISTERLY</h3><span class="no">01</span></div><span class="tag">Women's daily multivitamin</span><p class="desc">A concept redesign that turns a cluttered subscription offer into one clear, confident path to subscribe, with real social proof at the decision point.</p><span class="view">View live <span class="arw">→</span></span></div>
-    </a>
-    <a href="bespoke-carpentry/" target="_blank" rel="noopener" class="card card-cursor">
-      <div class="win"><div class="cb"><i></i><i></i><i></i><span>handmade-furniture.co.uk</span></div><img class="shot" src="assets/work/bespoke-carpentry.jpg" alt="The Bespoke Carpentry Co redesign" loading="lazy"></div>
-      <div class="meta"><div class="top"><h3>The Bespoke Carpentry Co</h3><span class="no">02</span></div><span class="tag">Live-edge dining tables</span><p class="desc">A high-value product page rebuilt around real social proof, clear customisation and a confident path to the basket.</p><span class="view">View live <span class="arw">→</span></span></div>
-    </a>
-    <a href="WoodchesterCabinetMakers/" target="_blank" rel="noopener" class="card card-cursor">
-      <div class="win"><div class="cb"><i></i><i></i><i></i><span>woodchestercabinetmakers.co.uk</span></div><img class="shot" src="assets/work/woodchester.jpg" alt="Woodchester Cabinet Makers redesign" loading="lazy"></div>
-      <div class="meta"><div class="top"><h3>Woodchester Cabinet Makers</h3><span class="no">03</span></div><span class="tag">Bespoke kitchens</span><p class="desc">A high-value kitchen maker, redesigned to turn browsers into booked design consultations.</p><span class="view">View live <span class="arw">→</span></span></div>
-    </a>
-    <a href="RUCIUK/" target="_blank" rel="noopener" class="card card-cursor">
-      <div class="win"><div class="cb"><i></i><i></i><i></i><span>ruci — redesign</span></div><img class="shot" src="assets/work/ruci.jpg" alt="RUCI redesign" loading="lazy"></div>
-      <div class="meta"><div class="top"><h3>RUCI</h3><span class="no">04</span></div><span class="tag">Subscription &amp; lifestyle</span><p class="desc">A concept redesign focused on making the brand's story and products convert on the first visit.</p><span class="view">View live <span class="arw">→</span></span></div>
-    </a>
-  </div>
-</div></section>
+  <section class="hero pad"><div class="wrap">
+    <div class="top">
+      <span class="kicker">Web design, development &amp; conversion</span>
+      <span class="rating"><span class="dot"></span> Two people, one focus: your conversions</span>
+    </div>
+    <div class="hline">
+      <span class="hword"><span>Your</span></span>
+      <span class="hword"><span>tra⁠ffi⁠c</span></span>
+      <span class="hvid v1"><div class="hscroll"><img id="hv1" alt="Project preview"></div></span>
+      <span class="hword"><span>is</span></span>
+    </div>
+    <div class="hline">
+      <span class="hword"><span>expensive.</span></span>
+      <span class="hword"><span>Your</span></span>
+      <span class="hword"><span>page</span></span>
+    </div>
+    <div class="hline">
+      <span class="hword"><span>shouldn’t</span></span>
+      <span class="hvid v2"><div class="hscroll"><img id="hv2" alt="Project preview"></div></span>
+      <span class="hword"><span>waste&nbsp;it.</span></span>
+    </div>
+    <div class="foot">
+      <p class="lead">We are Jarek and Lucia. We rebuild the pages where your visitors quietly slip away, so the traffic you already pay for turns into real enquiries and sales. Not a prettier website. One that actually earns its keep.</p>
+      <div class="btnrow">
+        <a href="#/contact" class="btn pop" data-link>Get a free teardown</a>
+        <a href="#/work" class="btn ghost" data-link>See the work</a>
+      </div>
+    </div>
+  </div></section>
 
-<!-- KINETIC -->
-<div class="kinetic" id="kin">
-  <div class="kinetic-track-wrap">
-    <div class="track" id="kinTrack">
-      <span class="phrase solid">More revenue from the traffic you already have</span>
-      <span class="bullet">•</span>
-      <span class="phrase out">More revenue from the traffic you already have</span>
-      <span class="bullet">•</span>
-      <span class="phrase solid">More revenue from the traffic you already have</span>
-      <span class="bullet">•</span>
-      <span class="phrase out">More revenue from the traffic you already have</span>
-      <span class="bullet">•</span>
-    </div>
-  </div>
-</div>
+  <div class="ticker"><div class="tickrow" id="tick"></div></div>
 
-<!-- SERVICES (bento) -->
-<section id="services"><div class="container">
-  <div class="svc-split">
-    <div class="svc-head reveal">
-      <h2 class="svc-h2">What <em>I do.</em></h2>
-      <p class="svc-sub">A tight set of services, all pointed at one thing: turning the visitors you already have into revenue.</p>
-    </div>
-    <div class="svc-grid reveal">
-      <a href="#contact" data-service="Conversion audits" class="svc-card svc-feat">
-        <span class="no">01</span>
-        <h3>Conversion audits</h3>
-        <p>A clear teardown of exactly where your page leaks sales, and what to fix first.</p>
-        <span class="svc-tag">Free teardown as entry point <span aria-hidden="true">→</span></span>
-        <span class="svc-arrow" aria-hidden="true">→</span>
-      </a>
-      <a href="#contact" data-service="Page &amp; funnel redesign" class="svc-card">
-        <span class="no">02</span>
-        <h3>Page &amp; funnel redesign</h3>
-        <p>Rebuild the moments where visitors decide and hesitate, around one clear action.</p>
-        <span class="svc-arrow" aria-hidden="true">→</span>
-      </a>
-      <a href="#contact" data-service="Shopify design &amp; build" class="svc-card">
-        <span class="no">03</span>
-        <h3>Shopify design &amp; build</h3>
-        <p>Stores that load fast, look considered, and actually sell.</p>
-        <span class="svc-arrow" aria-hidden="true">→</span>
-      </a>
-      <a href="#contact" data-service="Webflow design &amp; build" class="svc-card">
-        <span class="no">04</span>
-        <h3>Webflow design &amp; build</h3>
-        <p>Marketing sites that convert, not just impress.</p>
-        <span class="svc-arrow" aria-hidden="true">→</span>
-      </a>
-      <a href="#contact" data-service="Email &amp; retention (Klaviyo)" class="svc-card">
-        <span class="no">05</span>
-        <h3>Email &amp; retention (Klaviyo)</h3>
-        <p>Win back the visitors who didn't buy the first time, and turn one order into many.</p>
-        <span class="svc-arrow" aria-hidden="true">→</span>
-      </a>
-    </div>
-  </div>
-</div></section>
+  <section class="sec pad"><div class="wrap">
+    <p class="statement" id="statement" data-text="Right now, people are landing on your website, feeling a flicker of doubt, and leaving. You paid for every one of them. That silent hesitation is costing you more than any ad budget ever could."></p>
+  </div></section>
 
-<!-- WHO I WORK BEST WITH (editorial band) -->
-<section id="who"><div class="container">
-  <div class="who-grid reveal">
-    <div class="who-l">
-      <span class="lbl mono">Who I work best with</span>
-      <p class="who-statement">Brands that want <em>a website that sells.</em></p>
+  <!-- WORK (real) -->
+  <section class="sec pad" style="padding-top:0"><div class="wrap">
+    <div class="shead rev">
+      <div><span class="kicker">Selected work</span>
+        <h2 class="h2" style="margin-top:var(--s4)">Selected <span class="em">work.</span></h2></div>
+      <p class="body">Real UK brands, rebuilt around one question: where is this page losing customers, and how do we win them back? Every one is live. Hover to scroll the full page, or open it and see for yourself.</p>
     </div>
-    <div class="who-r">
-      <ul class="who-checks reveal">
-        <li style="--i:0"><span class="chk" aria-hidden="true">✓</span>Selling online and want more from the visitors you get</li>
-        <li style="--i:1"><span class="chk" aria-hidden="true">✓</span>Already spending on traffic (Meta, Google, or both)</li>
-        <li style="--i:2"><span class="chk" aria-hidden="true">✓</span>Building on Shopify or Webflow</li>
-        <li style="--i:3"><span class="chk" aria-hidden="true">✓</span>Ready to fix pages, not just chat about them</li>
-      </ul>
-      <p class="who-note">If that sounds like you, we'll get on well.</p>
+    <div class="work rev" id="work"></div>
+    <div class="btnrow rev" style="margin-top:var(--s7)">
+      <a href="#/work" class="arrowlink">See all work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
     </div>
-  </div>
-</div></section>
+  </div></section>
 
-<!-- APPROACH (horizontal 3-step flow) -->
-<section id="approach"><div class="container">
-  <div class="sec-head reveal"><span class="lbl mono">Process</span><h2 class="proc-h2">How <em>I work.</em></h2></div>
-  <div class="proc-flow reveal">
-    <div class="proc-line" aria-hidden="true"><span class="proc-line-inner"></span></div>
-    <div class="proc-step">
-      <span class="proc-dot" aria-hidden="true"></span>
-      <span class="proc-big">01</span>
-      <h3>Find the leak</h3>
-      <p>I audit your live page and the numbers behind it to find where intent is lost: the gap between the traffic you pay for and the action you need.</p>
-      <span class="proc-outcome">Outcome: you see exactly where it leaks</span>
+  <!-- services -->
+  <section class="sec pad" style="padding-top:0"><div class="wrap">
+    <div class="shead rev">
+      <div><span class="kicker">What we do</span>
+        <h2 class="h2" style="margin-top:var(--s4)">What <span class="em">we do.</span></h2></div>
+      <p class="body">We keep it simple. A focused set of services, every one aimed at the same result: more of your visitors becoming customers.</p>
     </div>
-    <div class="proc-step">
-      <span class="proc-dot" aria-hidden="true"></span>
-      <span class="proc-big">02</span>
-      <h3>Redesign the page</h3>
-      <p>I rebuild it in Shopify or Webflow around one clear decision, with the hierarchy, copy and trust cues that decision actually needs.</p>
-      <span class="proc-outcome">Outcome: a page built around one decision</span>
+    <div class="svc rev">
+      <article class="svcbox">
+        <span class="motif"><svg viewBox="0 0 52 52"><rect class="stroke" x="8" y="8" width="26" height="34" rx="3"/><path class="stroke" d="M14 16h14M14 23h14M14 30h8"/><circle class="stroke" cx="35" cy="35" r="9"/><path class="stroke" d="M42 42l6 6"/></svg></span>
+        <span class="n">01</span><h3>Conversion audits</h3>
+        <p>We show you exactly where your page is losing customers and what to fix first, in plain English. It starts free, so you see the value before you spend a penny.</p>
+        <div class="chips"><span class="chip">Live page</span><span class="chip">The numbers behind it</span><span class="chip">Ranked fixes</span></div>
+      </article>
+      <article class="svcbox">
+        <span class="motif"><svg viewBox="0 0 52 52"><path class="stroke" d="M8 10h36l-13 16v14l-10 4V26z"/></svg></span>
+        <span class="n">02</span><h3>Page &amp; funnel redesign</h3>
+        <p>We rebuild the exact moments where people hesitate, around one clear action, so the path from landing to enquiry feels obvious instead of confusing.</p>
+        <div class="chips"><span class="chip">Hierarchy</span><span class="chip">Copy</span><span class="chip">Trust cues</span></div>
+      </article>
+      <article class="svcbox">
+        <span class="motif"><svg viewBox="0 0 52 52"><path class="stroke" d="M12 16h28l-2.5 26H14.5z"/><path class="stroke" d="M19 16a7 7 0 0114 0"/><path class="stroke" d="M26 34V24M22 28l4-4 4 4"/></svg></span>
+        <span class="n">03</span><h3>Design &amp; development</h3>
+        <p>Custom code, Framer, Shopify or Webflow, whatever fits you best. Fast, polished, and built to sell, not just to look good in a screenshot.</p>
+        <div class="chips"><span class="chip">Any platform</span><span class="chip">Fast</span><span class="chip">Built to sell</span></div>
+      </article>
+      <article class="svcbox">
+        <span class="motif"><svg viewBox="0 0 52 52"><rect class="stroke" x="8" y="10" width="36" height="26" rx="3"/><path class="stroke" d="M8 17h36"/><path class="stroke" d="M24 30l10 4-4 2-2 4z"/></svg></span>
+        <span class="n">04</span><h3>SEO, analytics &amp; tracking</h3>
+        <p>We get you found by people already searching, and wire up tracking so every change is judged on real numbers, not opinions or guesswork.</p>
+        <div class="chips"><span class="chip">GA4</span><span class="chip">Search Console</span><span class="chip">Found on Google</span></div>
+      </article>
     </div>
-    <div class="proc-step">
-      <span class="proc-dot" aria-hidden="true"></span>
-      <span class="proc-big">03</span>
-      <h3>Make the case</h3>
-      <p>You get a working redesign and a plain-English breakdown of every change and why it should move the number that matters.</p>
-      <span class="proc-outcome">Outcome: you know why every change moves the number</span>
+  </div></section>
+
+  <div class="results"><div class="resrow" id="results"></div></div>
+
+  <!-- PROCESS with rich animated stages -->
+  <section class="sec pad"><div class="wrap">
+    <div class="shead rev">
+      <div><span class="kicker">How we work</span>
+        <h2 class="h2" style="margin-top:var(--s4)">How <span class="em">we work.</span></h2></div>
+      <p class="body">You see the work at every stage, so nothing is ever a surprise. And every change we make comes with a clear reason for why it should move your numbers.</p>
     </div>
-  </div>
-</div></section>
+    <div class="pin-grid">
+      <div class="pin-list" id="plist">
+        <div class="pstep on" data-i="0"><div class="ph"><span class="n">01</span><h3>Diagnose</h3></div>
+          <p>We go through your live page and the numbers behind it to find where intent is lost, the exact points where visitors hesitate, leave, or never get in touch.</p><span class="bar"></span></div>
+        <div class="pstep" data-i="1"><div class="ph"><span class="n">02</span><h3>Restructure</h3></div>
+          <p>We rebuild the page around one clear decision, with the hierarchy, copy and trust cues that decision actually needs, planned before anything is designed.</p><span class="bar"></span></div>
+        <div class="pstep" data-i="2"><div class="ph"><span class="n">03</span><h3>Design &amp; build</h3></div>
+          <p>Jarek designs it in full, Lucia builds it on the right platform, exactly as approved. Fast, responsive, and yours to edit.</p><span class="bar"></span></div>
+        <div class="pstep" data-i="3"><div class="ph"><span class="n">04</span><h3>Launch &amp; prove</h3></div>
+          <p>It goes live with tracking wired in, plus a plain-English breakdown of every change and why it should move the number.</p><span class="bar"></span></div>
+      </div>
+      <div class="pin-stage" id="pstage">
 
-<!-- TEARDOWN -->
-<section id="teardown"><div class="container">
-  <div class="teardown reveal">
-    <h2>Not sure where your page is leaking? <span class="u">I'll show you. Free.</span></h2>
-    <p>Send me your highest-traffic page and I'll record a short teardown showing exactly where visitors hesitate and what I'd change first. No charge, no obligation. If it's useful, we talk.</p>
-    <a href="#contact" class="btn btn-solid mag" data-prefill="teardown">Get my free teardown <span class="arw">→</span></a>
-  </div>
-</div></section>
-
-<!-- FAQ -->
-<section id="faq"><div class="container">
-  <div class="sec-head reveal"><span class="lbl mono">FAQ</span><h2>Straight <em>answers.</em></h2></div>
-  <div class="faq reveal">
-    <div class="qa"><button class="qa-q" type="button" aria-expanded="false">These are concept redesigns. Have you done this for real clients? <span class="ic" aria-hidden="true">+</span></button><div class="qa-a"><div><p>These are self-initiated redesigns I built to show how I think and work. Every decision is grounded in real conversion principles. I'd apply the same process to your live page and your data.</p></div></div></div>
-    <div class="qa"><button class="qa-q" type="button" aria-expanded="false">How much does it cost? <span class="ic" aria-hidden="true">+</span></button><div class="qa-a"><div><p>It depends on scope. A single landing page is very different from a full funnel. Start with the free teardown. If we move forward, you get a fixed price before any work begins.</p></div></div></div>
-    <div class="qa"><button class="qa-q" type="button" aria-expanded="false">I already have a designer or developer. <span class="ic" aria-hidden="true">+</span></button><div class="qa-a"><div><p>Perfect. I can work alongside them. My focus is conversion: what to change and why. They can build it, or I can.</p></div></div></div>
-    <div class="qa"><button class="qa-q" type="button" aria-expanded="false">What do I actually get? <span class="ic" aria-hidden="true">+</span></button><div class="qa-a"><div><p>A redesigned page in Shopify or Webflow, plus a plain-English breakdown of every change and the reasoning behind it, so you're never guessing.</p></div></div></div>
-    <div class="qa"><button class="qa-q" type="button" aria-expanded="false">Will this definitely raise my conversion rate? <span class="ic" aria-hidden="true">+</span></button><div class="qa-a"><div><p>No one honest can promise a number. What I promise is a page built on sound conversion principles with a clear rationale for every decision, so you're making informed bets, not guesses.</p></div></div></div>
-  </div>
-</div></section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="contact-noise" aria-hidden="true"></div>
-  <div class="fx" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span></div>
-  <div class="container">
-    <div class="contact-grid">
-      <div class="contact-l reveal">
-        <span class="mono contact-eyebrow">Contact</span>
-        <h2 class="contact-h2">Let's turn your traffic <em>into revenue.</em></h2>
-        <p class="sub">Send me the page you're paying to send traffic to, and I'll tell you where I'd start. No pitch, just a straight read.</p>
-        <div class="contact-actions">
-          <a class="contact-btn" href="https://wa.me/447513497082?text=Hi%20Lucia%2C%20I%20found%20you%20through%20konar.studio" target="_blank" rel="noopener" aria-label="Message Lucia on WhatsApp">
-            <span class="cb-ic" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.97L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.86 9.86 0 0 0 12.04 2Zm0 18.13c-1.48 0-2.94-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.37c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.23 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.7-.8-.23-.09-.4-.13-.56.13-.17.25-.64.8-.79.97-.14.16-.29.19-.54.06-.25-.12-1.05-.39-2-1.24a7.5 7.5 0 0 1-1.38-1.72c-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.84-.2-.49-.41-.43-.56-.43l-.48-.01a.93.93 0 0 0-.67.31c-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.02 2.57.13.17 1.76 2.68 4.26 3.76.6.26 1.06.41 1.42.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.11-.23-.17-.48-.29Z"/></svg></span>
-            <span>WhatsApp me</span>
-          </a>
-          <a class="contact-btn" href="mailto:lucia@konar.studio?subject=Enquiry%20from%20konar.studio" aria-label="Email Lucia">
-            <span class="cb-ic" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 5h17A1.5 1.5 0 0 1 22 6.5v11a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 17.5v-11A1.5 1.5 0 0 1 3.5 5Zm0 1.5v.36l8.5 5.31 8.5-5.31V6.5h-17Zm17 2.13-8.1 5.06a.75.75 0 0 1-.8 0L3.5 8.63v8.87h17V8.63Z"/></svg></span>
-            <span>Email us</span>
-          </a>
+        <!-- 1 DIAGNOSE, browser mock, scan, labelled issue pins -->
+        <div class="pstage on" data-i="0">
+          <div class="dwin">
+            <div class="dbar"><i></i><i></i><i></i></div>
+            <div class="dbody">
+              <div class="dh"></div><div class="dbig"></div>
+              <div class="drow"><span></span><span></span><span></span></div>
+              <div class="dcta"></div>
+            </div>
+            <div class="scanline"></div>
+            <span class="dpin" style="left:52%;top:26%;animation-delay:.7s"><b></b><em>Weak headline</em></span>
+            <span class="dpin" style="left:14%;bottom:30%;animation-delay:1.7s"><b></b><em>No trust</em></span>
+            <span class="dpin" style="right:14%;bottom:18%;animation-delay:2.7s"><b></b><em>Buried CTA</em></span>
+          </div>
         </div>
-        <ul class="contact-stack">
-          <li><a href="https://www.linkedin.com/in/lucia-pagano-8161a72b7/" target="_blank" rel="noopener noreferrer"><span class="lb">LinkedIn</span><span class="val">lucia-pagano</span><span class="arw">→</span></a></li>
-          <li><a href="https://www.tiktok.com/@luuciiaap" target="_blank" rel="noopener noreferrer"><span class="lb">TikTok</span><span class="val">@luuciiaap</span><span class="arw">→</span></a></li>
-        </ul>
+
+        <!-- 2 RESTRUCTURE, scattered blocks reorganise into a clear order, labelled -->
+        <div class="pstage" data-i="1">
+          <div class="dwin">
+            <div class="dbar"><i></i><i></i><i></i></div>
+            <div class="rstage">
+              <div class="rb b-hero"><span class="rlab">Proof first</span></div>
+              <div class="rb b-text"></div>
+              <div class="rb b-l"></div>
+              <div class="rb b-r"></div>
+              <div class="rb b-cta"><span class="rlab on-dark">One clear CTA</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 DESIGN & BUILD, figma: sections dropped in one by one by the cursor -->
+        <div class="pstage" data-i="2">
+          <div class="fig">
+            <div class="figbar">
+              <span class="fdot"></span><span class="fdot"></span><span class="fdot"></span>
+              <span class="ftool"></span><span class="ftool"></span><span class="fname">konk.fig</span>
+            </div>
+            <div class="figmain">
+              <div class="figleft">
+                <span class="flayer" data-l="0"></span><span class="flayer" data-l="1"></span>
+                <span class="flayer" data-l="2"></span><span class="flayer" data-l="3"></span>
+              </div>
+              <div class="figcanvas">
+                <div class="figframe">
+                  <div class="fpiece p-img" data-p="0"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="10" r="1.6" fill="currentColor"/><path d="M21 16l-5-5-6 6-3-3-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></div>
+                  <div class="fpiece p-h" data-p="1"></div>
+                  <div class="fpiece p-t1" data-p="2"></div>
+                  <div class="fpiece p-t2" data-p="2"></div>
+                  <div class="fpiece p-cta" data-p="3"><span></span></div>
+                </div>
+                <span class="figcur"><svg viewBox="0 0 16 16"><path d="M1 1l5.5 13.5 2-5.5 5.5-2z"/></svg><em>Lucia</em></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 LAUNCH, live signal + a report card with numbers improving -->
+        <div class="pstage" data-i="3">
+          <div class="launchwrap">
+            <div class="livebig">
+              <span class="lradar"><b></b><b></b><b></b></span>
+              <span class="ldot"></span>
+              <span class="llabel">Live</span>
+            </div>
+            <div class="report">
+              <div class="rmetric">
+                <span class="rk">Conversion rate</span>
+                <span class="rv"><b class="count" data-to="3.8" data-dec="1">0</b>%</span>
+                <span class="rtrend"><svg viewBox="0 0 12 12"><path d="M2 8l4-4 4 4" fill="none" stroke="currentColor" stroke-width="2"/></svg><b class="count" data-to="42">0</b>%</span>
+              </div>
+              <div class="rmetric">
+                <span class="rk">Enquiries / mo</span>
+                <span class="rv"><b class="count" data-to="128">0</b></span>
+                <span class="rtrend"><svg viewBox="0 0 12 12"><path d="M2 8l4-4 4 4" fill="none" stroke="currentColor" stroke-width="2"/></svg><b class="count" data-to="61">0</b>%</span>
+              </div>
+              <svg class="rspark" viewBox="0 0 220 64" preserveAspectRatio="none">
+                <path class="rsfill" d="M4 54 L40 48 L76 50 L112 32 L148 34 L184 18 L216 8 L216 64 L4 64 Z"/>
+                <path class="rsline" d="M4 54 L40 48 L76 50 L112 32 L148 34 L184 18 L216 8"/>
+                <circle class="rdot" cx="216" cy="8" r="3.5"/>
+              </svg>
+            </div>
+          </div>
+        </div>
       </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ANALYTICS -->
+  <section class="sec pad" style="padding-top:0"><div class="wrap">
+    <div class="shead rev">
+      <div><span class="kicker">After launch</span>
+        <h2 class="h2" style="margin-top:var(--s4)">You’ll see <span class="em">whether it worked.</span></h2></div>
+      <p class="body">Every build ships with tracking wired in, so the page is judged on the number that matters, not on opinions.</p>
+    </div>
+    <div class="an rev" id="an">
+      <div class="anc"><span class="anpulse"></span><span class="anspark s1"></span><span class="anspark s2"></span><span class="anspark s3"></span>
+        <div class="anhead"><span class="anicon"><svg viewBox="0 0 24 24"><path class="dash" d="M4 15l5-5 4 4 7-8"/></svg></span><h4>Conversion, as an event</h4></div>
+        <p>Every add-to-cart, enquiry and checkout recorded, so you can see which changes moved the number rather than guessing from traffic.</p>
+        <svg class="chart" viewBox="0 0 320 140" preserveAspectRatio="none">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6FB50" stop-opacity=".22"/><stop offset="1" stop-color="#E6FB50" stop-opacity="0"/></linearGradient></defs>
+          <g class="grid"><line x1="0" y1="38" x2="320" y2="38"/><line x1="0" y1="76" x2="320" y2="76"/><line x1="0" y1="114" x2="320" y2="114"/></g>
+          <path class="ar" d="M6 112 L58 100 L110 104 L162 74 L214 80 L266 44 L314 28 L314 140 L6 140 Z"/>
+          <path class="ln" id="lnpath" style="stroke:#E6FB50" d="M6 112 L58 100 L110 104 L162 74 L214 80 L266 44 L314 28"/>
+          <circle class="spark" r="4" style="offset-path:path('M6 112 L58 100 L110 104 L162 74 L214 80 L266 44 L314 28')"/>
+          <circle class="dot" cx="314" cy="28" r="5"/></svg>
+        <div class="growstat"><b data-to="34">0</b><span>tracked conversions this week</span></div>
+      </div>
+      <div class="anc"><span class="anpulse"></span><span class="anspark s1"></span><span class="anspark s2"></span><span class="anspark s3"></span>
+        <div class="anhead"><span class="anicon"><svg viewBox="0 0 24 24"><path class="dash" d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><h4>Which pages earn their place</h4></div>
+        <p>Pages ranked by what they bring in, so the next round of work goes where it pays.</p>
+        <svg class="chart" viewBox="0 0 220 140">
+          <g class="grid"><line x1="0" y1="135" x2="220" y2="135"/></g>
+          <rect class="bar" x="10" y="90" width="26" height="45" rx="5" style="animation-delay:.05s"/>
+          <rect class="bar" x="52" y="66" width="26" height="69" rx="5" style="animation-delay:.15s"/>
+          <rect class="bar hl" x="94" y="38" width="26" height="97" rx="5" style="animation-delay:.25s"/>
+          <rect class="bar" x="136" y="78" width="26" height="57" rx="5" style="animation-delay:.35s"/>
+          <rect class="bar" x="178" y="54" width="26" height="81" rx="5" style="animation-delay:.45s"/></svg>
+      </div>
+      <div class="anc"><span class="anpulse"></span><span class="anspark s1"></span><span class="anspark s2"></span><span class="anspark s3"></span>
+        <div class="anhead"><span class="anicon"><svg viewBox="0 0 24 24"><rect class="dash" x="7" y="3" width="10" height="18" rx="2"/><path class="dash" d="M11 18h2"/></svg></span><h4>Mobile is where it’s decided</h4></div>
+        <p>Most decisions happen on a phone, so mobile gets its own design and its own numbers.</p>
+        <svg class="chart" viewBox="0 0 220 140">
+          <g class="ring2" transform="translate(110,72) rotate(-90)"><circle class="trk" r="48"/><circle class="val" r="48"/></g>
+          <circle class="spin" cx="110" cy="24" r="4" fill="#E6FB50"/>
+          <text x="110" y="67" text-anchor="middle" font-family="Bricolage Grotesque" font-size="13" font-weight="600" fill="#20201C">Mobile</text>
+          <text x="110" y="84" text-anchor="middle" font-family="Instrument Sans" font-size="11" fill="#6B695F">vs desktop</text></svg>
+      </div>
+    </div>
+    <div class="tags rev" style="margin-top:var(--s5)">
+      <span class="tag">GA4</span><span class="tag">Search Console</span><span class="tag">Event tracking</span><span class="tag">Core Web Vitals</span><span class="tag">Klaviyo</span>
+    </div>
+    <p class="rev" style="margin-top:var(--s4);font-size:var(--t-sm);color:var(--mute2);max-width:62ch">The charts above show what the dashboard looks like, not a promise. Real figures go here once a page has been live long enough to mean something.</p>
+  </div></section>
+
+  <!-- TEAM teaser -->
+  <section class="sec pad" style="padding-top:0"><div class="wrap">
+    <div class="shead rev">
+      <div><span class="kicker">The two of us</span>
+        <h2 class="h2" style="margin-top:var(--s4)">You hire people, <span class="em">not a faceless agency.</span></h2></div>
+      <p class="body">Jarek does the strategy and design, Lucia builds it and proves it works. You deal with the two of us directly, start to finish. No account managers, no juniors, no being passed around.</p>
+    </div>
+    <div class="team rev" data-teamgroup>
+      <div class="teamcircle">
+        <div class="torbit">
+          <span class="ring"></span>
+          <div class="tdisc active" data-disc="jarek">
+            <div class="tstack"><img loading="lazy" decoding="async" class="main" data-key="jarek_main" alt="Jarek Konarski"><img loading="lazy" decoding="async" data-key="jarek_c1" alt="Jarek Konarski"><img loading="lazy" decoding="async" data-key="jarek_c2" alt="Jarek Konarski"><img loading="lazy" decoding="async" data-key="jarek_c3" alt="Jarek Konarski"><img loading="lazy" decoding="async" data-key="jarek_c4" alt="Jarek Konarski"></div>
+            <span class="thint2"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>hover to see us</span><div class="tpips"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="idlelabel"><b>Jarek</b><span>Design</span></div>
+          </div>
+          <div class="tdisc idle" data-disc="lucia">
+            <div class="tstack"><img loading="lazy" decoding="async" class="main" data-key="lucia_main" alt="Lucia Pagano"><img loading="lazy" decoding="async" data-key="lucia_c1" alt="Lucia Pagano"><img loading="lazy" decoding="async" data-key="lucia_c2" alt="Lucia Pagano"><img loading="lazy" decoding="async" data-key="lucia_c3" alt="Lucia Pagano"><img loading="lazy" decoding="async" data-key="lucia_c4" alt="Lucia Pagano"></div>
+            <span class="thint2"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>hover to see us</span><div class="tpips"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="idlelabel"><b>Lucia</b><span>Dev</span></div>
+          </div>
+        </div>
+        <div class="tprofile">
+          <div class="pcard on" data-profile="jarek">
+            <span class="prole">Design &amp; Strategy</span>
+            <div class="pname">Jarek Konarski</div>
+            <div class="psub">The plan and the design</div>
+            <p>Does the strategy and design. He figures out how your business actually wins customers, then designs every page around that. He will happily talk you out of something that looks nice but will not sell.</p>
+            <div class="ptags"><span class="ptag">Strategy</span><span class="ptag">UX &amp; design</span><span class="ptag">Conversion</span></div>
+            <button class="tswitch" data-switch="lucia"><span class="sw"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg></span>Meet Lucia</button>
+          </div>
+          <div class="pcard" data-profile="lucia">
+            <span class="prole">Development &amp; Conversion</span>
+            <div class="pname">Lucia Pagano</div>
+            <div class="psub">The build and the numbers</div>
+            <p>Builds it and makes it real. Fast, on the right platform, with tracking wired in so we can prove what works. She is the one who refuses to leave anything half finished, ever.</p>
+            <div class="ptags"><span class="ptag">Development</span><span class="ptag">Analytics</span><span class="ptag">SEO</span></div>
+            <button class="tswitch" data-switch="jarek"><span class="sw"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg></span>Meet Jarek</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btnrow rev" style="margin-top:var(--s7)">
+      <a href="#/about" class="arrowlink" data-link>More about how we work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+    </div>
+  </div></section>
+
+  <!-- FAQ -->
+  <section class="sec pad" style="padding-top:0"><div class="wrap">
+    <div class="shead rev">
+      <div><span class="kicker">FAQ</span>
+        <h2 class="h2" style="margin-top:var(--s4)">Straight <span class="em">answers.</span></h2></div>
+      <p class="body">The honest answers, including the ones that probably lose us work. We would rather you trust us than book us.</p>
+    </div>
+    <div class="acc rev" id="faq-home"></div>
+  </div></section>
+
+  <!-- big CTA -->
+  <section class="sec pad" style="padding-top:0"><div class="wrap">
+    <div class="bigcta rev">
+      <span class="glow"></span>
+      <h2>See exactly what is costing you customers. For free.</h2>
+      <p class="lead">Send us your busiest page. We will send back a short, honest teardown showing where people drop off and the first things we would change. No cost, no pitch, no catch. If it helps, we talk. If not, you keep the ideas.</p>
+      <div class="contacts">
+        <a class="cpill" href="mailto:lucia@konar.studio"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>lucia@konar.studio</a>
+        <a class="cpill alt" href="tel:+447935956564"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.5a16 16 0 006 6l1.1-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg>07935 956564</a>
+      </div>
+      <div class="csoc">
+        <a href="https://www.linkedin.com/in/lucia-pagano-8161a72b7/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.76-1.95 4.02 0 4.76 2.5 4.76 5.76V21h-4v-5.6c0-1.34-.03-3.06-1.9-3.06-1.9 0-2.19 1.45-2.19 2.96V21h-4z"/></svg></a>
+        <a href="https://www.tiktok.com/@luuciiaap" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.5 2h-3v13.2a2.7 2.7 0 11-2.7-2.7c.28 0 .54.04.8.12V9.5a6 6 0 102.9 5.1V8.4a6.6 6.6 0 003.9 1.27V6.6a3.7 3.7 0 01-1.9-.62A3.75 3.75 0 0116.5 2z"/></svg></a>
+      </div>
+    </div>
+  </div></section>
+</main>
+
+<!-- ============================ WORK -->
+<main class="page" id="p-work">
+  <section class="phero pad"><div class="wrap">
+    <span class="kicker rev">Work</span>
+    <h1 class="h1 rev">Real projects, and the redesigns that show how we think.</h1>
+    <p class="lead rev">We are currently building a new site for Eleven Trees. Alongside it are redesigns of real UK brands we did on our own initiative, each one built to show exactly how we approach a page. Hover any preview to scroll the full build, or open it live.</p>
+  </div></section>
+  <section class="sec pad" style="padding-top:0"><div class="wrap">
+    <div class="work rev" id="work2"></div>
+    <p class="rev" style="margin-top:var(--s7);font-size:var(--t-sm);color:var(--mute2);max-width:70ch">The concept redesigns are shown for demonstration only. We are not affiliated with, or endorsed by, the brands featured.</p>
+  </div></section>
+  <section class="sec pad" style="padding-top:0"><div class="wrap"><div class="bigcta rev"><span class="glow"></span>
+    <h2>Want the same for your page?</h2>
+    <p class="lead">Send us the page you are paying to send traffic to, and we will tell you where we would start.</p>
+    <div class="contacts"><a class="cpill" href="mailto:lucia@konar.studio"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>lucia@konar.studio</a></div>
+  </div></div></section>
+</main>
+
+<!-- ============================ SERVICES -->
+<main class="page" id="p-services">
+  <section class="phero pad"><div class="wrap">
+    <span class="kicker rev">Services</span>
+    <h1 class="h1 rev">A tight set of services, all pointed at one thing.</h1>
+    <p class="lead rev">Turning the visitors you already have into revenue. Start with the free teardown; if we move forward, you get a fixed price before any work begins.</p>
+  </div></section>
+  <section class="sec pad" style="padding-top:0"><div class="wrap">
+    <div class="grid3 rev">
+      <div class="card"><h4>Conversion audit</h4><ul><li>A clear teardown of where your page leaks sales</li><li>The numbers behind the page, not guesses</li><li>Ranked fixes, so you know what to do first</li><li>Free teardown as the way in</li></ul></div>
+      <div class="card"><h4>Page &amp; funnel redesign</h4><ul><li>Rebuilt around one clear decision</li><li>Hierarchy, copy and trust cues that convert</li><li>The moments people hesitate, fixed</li><li>One obvious next step on every page</li></ul></div>
+      <div class="card dark"><h4>Design &amp; development</h4><ul><li>Custom code or a builder like Framer</li><li>Shopify and Webflow when they fit</li><li>Fast, responsive, tested on real devices</li><li>Yours to own and edit</li></ul></div>
+      <div class="card"><h4>SEO &amp; Google Business</h4><ul><li>Technical SEO built into the site</li><li>Google Business Profile set up properly</li><li>Found by the people already searching</li><li>The groundwork most sites skip</li></ul></div>
+      <div class="card"><h4>Analytics &amp; tracking</h4><ul><li>GA4 and Search Console wired in</li><li>Every enquiry and sale as an event</li><li>See which pages actually earn</li><li>Judged on numbers, not opinions</li></ul></div>
+      <div class="card"><h4>On cost</h4><ul><li>Depends on scope, no fixed menu</li><li>Start with the free teardown</li><li>A fixed price before any work begins</li><li>No surprises, ever</li></ul></div>
+    </div>
+  </div></section>
+  <section class="sec pad" style="padding-top:0"><div class="wrap">
+    <span class="kicker rev">Who we work best with</span>
+    <h2 class="h2 rev" style="margin:var(--s4) 0 var(--s6);max-width:18ch">Brands that want <span class="em">a website that sells.</span></h2>
+    <div class="rows rev">
+      <div class="rrow"><span class="n">01</span><h3>Selling online already</h3><p>And you want more from the visitors you get, not just more visitors.</p></div>
+      <div class="rrow"><span class="n">02</span><h3>Spending on traffic</h3><p>Meta, Google, or both, so every point of conversion is worth real money.</p></div>
+      <div class="rrow"><span class="n">03</span><h3>On Shopify or Webflow</h3><p>Where we can design and build the fix, not just recommend it. Though we work on any platform that suits you.</p></div>
+      <div class="rrow"><span class="n">04</span><h3>Ready to fix pages</h3><p>Not just chat about them. If that sounds like you, we’ll get on well.</p></div>
+    </div>
+  </div></section>
+  <section class="sec pad" style="padding-top:0"><div class="wrap">
+    <span class="kicker rev">FAQ</span>
+    <h2 class="h2 rev" style="margin:var(--s4) 0 var(--s6)">Straight <span class="em">answers.</span></h2>
+    <div class="acc rev" id="faq-full"></div>
+  </div></section>
+</main>
+
+<!-- ============================ PROCESS -->
+<main class="page" id="p-process">
+  <section class="phero pad"><div class="wrap">
+    <span class="kicker rev">Process</span>
+    <h1 class="h1 rev">How we work, start to finish.</h1>
+    <p class="lead rev">You see the work at every stage, and every change comes with the reason it should move the number that matters.</p>
+  </div></section>
+  <section class="sec pad" style="padding-top:0"><div class="wrap">
+    <div class="rows rev">
+      <div class="rrow"><span class="n">01</span><h3>Find the leak</h3><p>We go through your live page and the numbers behind it to find where intent is lost, the gap between the traffic you pay for and the action you need. Outcome: you see exactly where it leaks.</p></div>
+      <div class="rrow"><span class="n">02</span><h3>Redesign the page</h3><p>We rebuild it on the right platform around one clear decision, with the hierarchy, copy and trust cues that decision actually needs. Outcome: a page built around one decision.</p></div>
+      <div class="rrow"><span class="n">03</span><h3>Make the case</h3><p>You get a working redesign and a plain-English breakdown of every change and why it should move the number that matters. Outcome: you know why every change moves the number.</p></div>
+    </div>
+  </div></section>
+  <section class="sec pad" style="padding-top:0"><div class="wrap"><div class="bigcta rev"><span class="glow"></span>
+    <h2>Start with the free teardown.</h2>
+    <p class="lead">Send your highest-traffic page. We will show you where it leaks and what we would change first.</p>
+    <div class="contacts"><a class="cpill" href="mailto:lucia@konar.studio"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>lucia@konar.studio</a></div>
+  </div></div></section>
+</main>
+
+<!-- ============================ ABOUT -->
+<main class="page" id="p-about">
+  <section class="phero pad"><div class="wrap">
+    <span class="kicker rev">About</span>
+    <h1 class="h1 rev">Two developers who got tired of watching good businesses lose customers.</h1>
+    <p class="lead rev">We are Jarek and Lucia. We both studied full stack development, and we kept seeing the same thing: businesses that are genuinely good at what they do, with websites that hide it. So we built Konar Studio to fix exactly that.</p>
+  </div></section>
+
+  <!-- the story -->
+  <section class="sec pad" style="padding-top:0"><div class="wrap two">
+    <div class="rev">
+      <span class="kicker">Why we do this</span>
+      <h2 class="h3" style="margin-top:var(--s4)">A great business with a weak website is losing money every single day.</h2>
+      <p class="body" style="margin-top:var(--s5);font-size:var(--t-lg)">You can be the best builder, the best kitchen maker, the best brand in your market. If your website does not show it, the customer never finds out. They land, they doubt, they leave, and they buy from someone worse who simply looked more convincing online.</p>
+      <p class="body" style="margin-top:var(--s4);font-size:var(--t-lg)">That is the part that bothers us. It is fixable. Most sites are not losing customers because the business is bad. They are losing them because the page was built to look finished, not to sell.</p>
+      <p class="body" style="margin-top:var(--s4);font-size:var(--t-lg)">So that is our whole job. We find where your site loses people, rebuild those moments around a clear decision, and we stay on it until the numbers move. We do not hand over a nice looking site and disappear.</p>
+    </div>
+    <div class="rev">
+      <div class="card">
+        <h4 class="h4">What we work in</h4>
+        <div class="tags" style="margin-top:var(--s4)">
+          <span class="tag">Custom code</span><span class="tag">Framer</span><span class="tag">Shopify</span><span class="tag">Webflow</span><span class="tag">Figma</span><span class="tag">React / Next</span><span class="tag">GA4</span><span class="tag">Search Console</span><span class="tag">SEO</span>
+        </div>
+        <h4 class="h4" style="margin-top:var(--s7)">How we work</h4>
+        <p class="body" style="margin-top:var(--s3)">Any platform, whatever fits your business best. Custom code when it needs to be fast and bespoke, a builder like Framer when you need to run it yourself. We pick the right tool, not the one we feel like using.</p>
+        <h4 class="h4" style="margin-top:var(--s7)">Best fit</h4>
+        <p class="body" style="margin-top:var(--s3)">Businesses that already have customers and know their website could be doing far more of the work. If you care about the number of enquiries, not just how the site looks, we will get on well.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- THE TEAM -->
+  <section class="sec pad" style="padding-top:0"><div class="wrap">
+    <div class="shead rev">
+      <div><span class="kicker">The team</span>
+        <h2 class="h2" style="margin-top:var(--s4)">You will always know exactly who is doing your work.</h2></div>
+      <p class="body">No account managers, no handoffs to someone you never met. Just the two of us, on every project, start to finish.</p>
+    </div>
+    <div class="team rev" id="team" data-teamgroup>
+      <div class="teamcircle">
+        <div class="torbit">
+          <span class="ring"></span>
+          <div class="tdisc active" data-disc="jarek">
+            <div class="tstack"><img loading="lazy" decoding="async" class="main" data-key="jarek_main" alt="Jarek Konarski"><img loading="lazy" decoding="async" data-key="jarek_c1" alt="Jarek Konarski"><img loading="lazy" decoding="async" data-key="jarek_c2" alt="Jarek Konarski"><img loading="lazy" decoding="async" data-key="jarek_c3" alt="Jarek Konarski"><img loading="lazy" decoding="async" data-key="jarek_c4" alt="Jarek Konarski"></div>
+            <span class="thint2"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>hover to see us</span><div class="tpips"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="idlelabel"><b>Jarek</b><span>Design</span></div>
+          </div>
+          <div class="tdisc idle" data-disc="lucia">
+            <div class="tstack"><img loading="lazy" decoding="async" class="main" data-key="lucia_main" alt="Lucia Pagano"><img loading="lazy" decoding="async" data-key="lucia_c1" alt="Lucia Pagano"><img loading="lazy" decoding="async" data-key="lucia_c2" alt="Lucia Pagano"><img loading="lazy" decoding="async" data-key="lucia_c3" alt="Lucia Pagano"><img loading="lazy" decoding="async" data-key="lucia_c4" alt="Lucia Pagano"></div>
+            <span class="thint2"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>hover to see us</span><div class="tpips"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="idlelabel"><b>Lucia</b><span>Dev</span></div>
+          </div>
+        </div>
+        <div class="tprofile">
+          <div class="pcard on" data-profile="jarek">
+            <span class="prole">Design &amp; Strategy</span>
+            <div class="pname">Jarek Konarski</div>
+            <div class="psub">The plan and the design</div>
+            <p>Jarek is the one who works out the plan. Before anything gets designed, he digs into how your business really wins customers, what someone needs to believe before they buy, and the exact spots where your current site loses them.</p><p>Then he designs around all of that. Every section earns its place, and he can tell you why it is there. He genuinely cannot help redesigning menus and shop windows in his head when we are out, so putting it to good use was only fair.</p>
+            <div class="ptags"><span class="ptag">Strategy</span><span class="ptag">UX &amp; design</span><span class="ptag">Conversion</span></div>
+            <button class="tswitch" data-switch="lucia"><span class="sw"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg></span>Meet Lucia</button>
+          </div>
+          <div class="pcard" data-profile="lucia">
+            <span class="prole">Development &amp; Conversion</span>
+            <div class="pname">Lucia Pagano</div>
+            <div class="psub">The build and the numbers</div>
+            <p>Lucia turns the plan into something real, fast, and properly built. She works on whatever platform fits you best, from hand written code to Framer, and wires up the tracking so we are never guessing about what works.</p><p>She is the reason nothing ships half finished. After launch she keeps tuning the page from real data, usually with a cat asleep on the desk refusing to move. If it can be built well and measured, she has it handled.</p>
+            <div class="ptags"><span class="ptag">Development</span><span class="ptag">Analytics</span><span class="ptag">SEO</span></div>
+            <button class="tswitch" data-switch="jarek"><span class="sw"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg></span>Meet Jarek</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="body rev" style="margin-top:var(--s6);text-align:center;max-width:60ch;margin-inline:auto">We split the work evenly and we both talk to you directly. One of us designs the decision, the other builds and proves it. Because we sit together, nothing gets lost in a handover.</p>
+  </div></section>
+
+  <!-- WHY US -->
+  <section class="sec pad" style="padding-top:0"><div class="wrap">
+    <div class="shead rev">
+      <div><span class="kicker">Why us</span>
+        <h2 class="h2" style="margin-top:var(--s4)">What makes us different.</h2></div>
+      <p class="body">Plenty of people will build you a website. Here is what you get with us that you do not get from most.</p>
+    </div>
+    <div class="rev">
+      <div class="whyrow">
+        <span class="wi"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg></span>
+        <div><h3>We chase the number, not applause</h3>
+          <p>Most studios are done when the site looks good. That is where we start. We care about enquiries, sales and sign ups going up, and we set up the tracking to prove whether they did. A beautiful site that does not sell is a failure to us.</p></div>
+      </div>
+      <div class="whyrow">
+        <span class="wi"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg></span>
+        <div><h3>Design and code under one roof</h3>
+          <p>We are both full stack developers, so the person designing your page and the person building it actually understand each other. Nothing gets designed that cannot be built well, and nothing gets built that quietly drifts from the plan.</p></div>
+      </div>
+      <div class="whyrow">
+        <span class="wi"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <div><h3>We stay until it works</h3>
+          <p>Launch day is the start, not the finish. We keep improving the page based on what the data shows, so the site gets better after it goes live instead of slowly ageing. You are not left on your own with something you cannot change.</p></div>
+      </div>
+      <div class="whyrow">
+        <span class="wi"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <div><h3>Straight answers, no inflated claims</h3>
+          <p>We will tell you honestly when something you have asked for will hurt the site, and we will never promise a number we cannot control. The work you see here is labelled for exactly what it is. That is the studio we would want to hire.</p></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sec pad" style="padding-top:0"><div class="wrap"><div class="bigcta rev"><span class="glow"></span>
+    <h2>Let’s turn your traffic into revenue.</h2>
+    <p class="lead">Send us the page you are paying to send traffic to, and we will tell you where we would start.</p>
+    <div class="contacts">
+      <a class="cpill" href="mailto:lucia@konar.studio"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>lucia@konar.studio</a>
+      <a class="cpill alt" href="tel:+447935956564"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.5a16 16 0 006 6l1.1-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg>07935 956564</a>
+    </div>
+  </div></div></section>
+</main>
+
+<!-- ============================ CONTACT -->
+<main class="page" id="p-contact">
+  <section class="phero pad"><div class="wrap">
+    <span class="kicker rev">Contact</span>
+    <h1 class="h1 rev">Let’s turn your traffic <span class="em">into revenue.</span></h1>
+    <p class="lead rev">Send us the page you are paying to send traffic to, and we will tell you where we would start. No pitch, just a straight read.</p>
+  </div></section>
+  <section class="sec pad" style="padding-top:0"><div class="wrap"><div class="bigcta rev"><span class="glow"></span>
+    <h2>Get your free teardown.</h2>
+    <p class="lead">Your highest traffic page is enough. We will send back a short teardown showing where visitors hesitate and what we would change first.</p>
+    <div class="contacts">
+      <a class="cpill" href="mailto:lucia@konar.studio"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>lucia@konar.studio</a>
+      <a class="cpill alt" href="tel:+447935956564"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.5a16 16 0 006 6l1.1-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg>07935 956564</a>
+    </div>
+    <div class="csoc">
+      <a href="https://www.linkedin.com/in/lucia-pagano-8161a72b7/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.76-1.95 4.02 0 4.76 2.5 4.76 5.76V21h-4v-5.6c0-1.34-.03-3.06-1.9-3.06-1.9 0-2.19 1.45-2.19 2.96V21h-4z"/></svg></a>
+      <a href="https://www.tiktok.com/@luuciiaap" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.5 2h-3v13.2a2.7 2.7 0 11-2.7-2.7c.28 0 .54.04.8.12V9.5a6 6 0 102.9 5.1V8.4a6.6 6.6 0 003.9 1.27V6.6a3.7 3.7 0 01-1.9-.62A3.75 3.75 0 0116.5 2z"/></svg></a>
+    </div>
+  </div></div></section>
+</main>
+
+<footer class="pad"><div class="wrap foot">
+  <div class="foot-cta">
+    <h2 class="h2">Let’s turn your traffic <span class="em">into revenue.</span></h2>
+    <div style="display:flex;flex-direction:column;gap:var(--s5);align-items:flex-start">
+      <span class="foot-avail"><span class="dot"></span> Available for projects</span>
+      <a href="#/contact" data-link class="btn pop">Get a free teardown</a>
     </div>
   </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="foot-grid">
-      <div class="foot-col foot-brand">
-        <b>Lucia Pagano</b>
-        <span class="trading mono">Konar Studio</span>
-        <p class="role">I build websites and fix the ones that are losing sales.</p>
-      </div>
-      <div class="foot-col">
-        <h4>Get in touch</h4>
-        <ul>
-          <li><a href="mailto:lucia@konar.studio?subject=Enquiry%20from%20konar.studio">lucia@konar.studio <span class="arw">→</span></a></li>
-          <li><a href="https://www.linkedin.com/in/lucia-pagano-8161a72b7/" target="_blank" rel="noopener">LinkedIn lucia-pagano <span class="arw">→</span></a></li>
-          <li><a href="https://www.tiktok.com/@luuciiaap" target="_blank" rel="noopener">TikTok @luuciiaap <span class="arw">→</span></a></li>
-          <li><a href="#contact">Get a free teardown <span class="arw">→</span></a></li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <h4>On this page</h4>
-        <ul>
-          <li><a href="#work">Selected work</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#approach">Approach</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="foot-bottom">
-      <p class="disc">Concept redesigns shown for demonstration only. Not affiliated with, or endorsed by, the brands featured.</p>
-      <p class="copy">© 2026 Konar Studio</p>
+  <div class="foot-top">
+    <h2 class="h4">We build websites and fix the ones<br>that are losing sales.</h2>
+    <div class="foot-cols">
+      <div><b>Studio</b><a href="#/" data-link>Home</a><a href="#/work" data-link>Work</a><a href="#/services" data-link>Services</a><a href="#/process" data-link>Process</a><a href="#/about" data-link>About</a></div>
+      <div><b>Get in touch</b><a href="mailto:lucia@konar.studio">lucia@konar.studio</a><a href="https://www.linkedin.com/in/lucia-pagano-8161a72b7/" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.tiktok.com/@luuciiaap" target="_blank" rel="noopener">TikTok</a></div>
     </div>
   </div>
-</footer>
+  <div class="foot-bot"><span>© 2026 Konar Studio · Jarek Konarski &amp; Lucia Pagano</span><span>Design, development and conversion, London</span></div>
+  <div class="footbig-wrap"><div class="footbig" id="footbig"><span>KONAR</span><span>STUDIO</span></div></div>
+</div></footer>
 
-<div class="mcta"><a href="#contact" class="btn btn-solid">Start a project <span class="arw">→</span></a></div>
-
-<script>
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
-
-/* Stagger index */
-document.querySelectorAll('.stagger').forEach(g=>{
-  [...g.children].forEach((c,i)=>c.style.setProperty('--i',i));
-});
-
-/* Hero entry stagger — fire on next paint */
-(function(){
-  const hc=document.getElementById('heroContent');
-  if(!hc) return;
-  if(reduce){ hc.classList.add('in'); return; }
-  requestAnimationFrame(()=>requestAnimationFrame(()=>hc.classList.add('in')));
-})();
-
-/* Hero cursor-tracking radial glow */
-(function(){
-  const hero=document.querySelector('.hero');
-  const glow=hero?.querySelector('.hero-glow');
-  if(!hero||!glow||reduce||!fine) return;
-  let tx=50, ty=30, cx=50, cy=30, active=false;
-  hero.addEventListener('pointermove',e=>{
-    const r=hero.getBoundingClientRect();
-    tx=((e.clientX-r.left)/r.width)*100;
-    ty=((e.clientY-r.top)/r.height)*100;
-    if(!active){ active=true; hero.classList.add('glow-on'); }
-  });
-  hero.addEventListener('pointerleave',()=>{ active=false; hero.classList.remove('glow-on'); });
-  (function loop(){
-    cx+=(tx-cx)*.12;
-    cy+=(ty-cy)*.12;
-    glow.style.setProperty('--mx',cx.toFixed(2)+'%');
-    glow.style.setProperty('--my',cy.toFixed(2)+'%');
-    requestAnimationFrame(loop);
-  })();
-})();
-
-/* Reveal on scroll */
-if('IntersectionObserver' in window){
-  const io=new IntersectionObserver((es)=>{
-    es.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
-    });
-  },{threshold:.12, rootMargin:'0px 0px -60px 0px'});
-  document.querySelectorAll('.reveal,.stagger').forEach(el=>io.observe(el));
-}else{
-  document.querySelectorAll('.reveal,.stagger').forEach(el=>el.classList.add('in'));
-}
-
-/* Nav scrolled state + active section */
-const nav=document.querySelector('.nav');
-const navLinks=[...document.querySelectorAll('.nav-links a[href^="#"]')];
-addEventListener('scroll',()=>{
-  if(nav) nav.classList.toggle('scrolled', scrollY>60);
-},{passive:true});
-if(nav) nav.classList.toggle('scrolled', scrollY>60);
-
-if('IntersectionObserver' in window && navLinks.length){
-  const targets=navLinks.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
-  const linkFor=new Map(navLinks.map(a=>[a.getAttribute('href').slice(1),a]));
-  const spy=new IntersectionObserver((es)=>{
-    es.forEach(e=>{
-      const a=linkFor.get(e.target.id);
-      if(!a) return;
-      if(e.isIntersecting){
-        navLinks.forEach(l=>l.classList.remove('active'));
-        a.classList.add('active');
-      }
-    });
-  },{rootMargin:'-45% 0px -50% 0px', threshold:0});
-  targets.forEach(t=>spy.observe(t));
-}
-
-/* Hero collage — entry trigger + parallax */
-(function(){
-  const collage=document.getElementById('collage');
-  if(!collage) return;
-  if(reduce){ collage.classList.add('in'); return; }
-  requestAnimationFrame(()=>requestAnimationFrame(()=>collage.classList.add('in')));
-  if(!fine) return;
-  let tx=0,ty=0,cx=0,cy=0,active=false;
-  collage.addEventListener('pointermove',e=>{
-    const r=collage.getBoundingClientRect();
-    tx=Math.max(-12,Math.min(12,(e.clientX-r.left-r.width/2)*.02));
-    ty=Math.max(-12,Math.min(12,(e.clientY-r.top-r.height/2)*.02));
-    active=true;
-  });
-  collage.addEventListener('pointerleave',()=>{ tx=0; ty=0; active=false; });
-  (function loop(){
-    cx+=(tx-cx)*.12;
-    cy+=(ty-cy)*.12;
-    collage.style.transform='translate3d('+cx.toFixed(2)+'px,'+cy.toFixed(2)+'px,0)';
-    requestAnimationFrame(loop);
-  })();
-})();
-
-/* Magnetic buttons */
-if(fine && !reduce){
-  document.querySelectorAll('.mag').forEach(b=>{
-    b.addEventListener('pointermove',e=>{
-      const r=b.getBoundingClientRect();
-      const dx=(e.clientX-r.left-r.width/2)*.22;
-      const dy=(e.clientY-r.top-r.height/2)*.32;
-      const cx=Math.max(-10,Math.min(10,dx));
-      const cy=Math.max(-8,Math.min(8,dy));
-      b.style.transform='translate('+cx+'px,'+cy+'px)';
-    });
-    b.addEventListener('pointerleave',()=>{ b.style.transform=''; });
-  });
-}
-
-/* Minimal custom cursor — just a dot, grows on links */
-if(fine && !reduce){
-  document.body.classList.add('has-cursor');
-  const dot=document.createElement('div'); dot.className='cursor-dot';
-  document.body.append(dot);
-  let tx=innerWidth/2, ty=innerHeight/2, dx=tx, dy=ty;
-  addEventListener('pointermove',e=>{tx=e.clientX; ty=e.clientY;},{passive:true});
-  (function loop(){
-    dx+=(tx-dx)*.55; dy+=(ty-dy)*.55;
-    dot.style.transform='translate3d('+dx+'px,'+dy+'px,0) translate(-50%,-50%)';
-    requestAnimationFrame(loop);
-  })();
-  addEventListener('mouseleave',()=>dot.classList.add('hide'));
-  addEventListener('mouseenter',()=>dot.classList.remove('hide'));
-  const hideSelectors='a, button, .btn, .qa-q, input, textarea, summary, [role="button"]';
-  document.querySelectorAll(hideSelectors).forEach(el=>{
-    el.addEventListener('mouseenter',()=>dot.classList.add('hide'));
-    el.addEventListener('mouseleave',()=>dot.classList.remove('hide'));
-  });
-}
-
-/* Card hover pan (clamped to actual image height) */
-if(!reduce){
-  document.querySelectorAll('.card').forEach(card=>{
-    const win=card.querySelector('.win');
-    const shot=card.querySelector('.shot');
-    if(!win||!shot) return;
-    const run=()=>{
-      const renderedH = shot.getBoundingClientRect().height || (shot.naturalHeight/shot.naturalWidth*win.clientWidth);
-      const dist=Math.max(0, renderedH - win.clientHeight);
-      if(dist>0) shot.style.transform='translateY(-'+dist+'px)';
-    };
-    card.addEventListener('mouseenter',()=>{
-      if(shot.complete && shot.naturalWidth>0) run();
-      else shot.addEventListener('load',run,{once:true});
-    });
-    card.addEventListener('mouseleave',()=>{ shot.style.transform='translateY(0)'; });
-  });
-}
-
-/* Featured showcase pan — set --pan to the real image overflow so it stops at content end */
-(function(){
-  const box=document.querySelector('.showcase');
-  if(!box) return;
-  const img=box.querySelector('img');
-  const scroller=box.querySelector('.scroller');
-  const setPan=()=>{
-    if(!img.complete || !img.naturalWidth) return;
-    const renderedH = img.getBoundingClientRect().height || (img.naturalHeight/img.naturalWidth*scroller.clientWidth);
-    const dist=Math.max(0, renderedH - scroller.clientHeight);
-    box.style.setProperty('--pan', '-'+dist+'px');
-  };
-  if(img.complete && img.naturalWidth) setPan();
-  else img.addEventListener('load',setPan,{once:true});
-  addEventListener('resize',setPan);
-})();
-
-/* FAQ accordion (only one open) */
-document.querySelectorAll('.qa-q').forEach(q=>{
-  q.addEventListener('click',()=>{
-    const qa=q.closest('.qa');
-    const wasOpen=qa.classList.contains('open');
-    document.querySelectorAll('.qa.open').forEach(o=>{
-      o.classList.remove('open');
-      const b=o.querySelector('.qa-q');
-      if(b) b.setAttribute('aria-expanded','false');
-    });
-    if(!wasOpen){
-      qa.classList.add('open');
-      q.setAttribute('aria-expanded','true');
-    }
-  });
-});
-
-/* CTA smooth-scroll to #contact */
-document.querySelectorAll('a[href="#contact"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const target=document.getElementById('contact');
-    if(!target) return;
-    e.preventDefault();
-    target.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
-  });
-});
-</script>
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>

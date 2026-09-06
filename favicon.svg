@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Konar Studio">
+  <rect width="32" height="32" rx="7" fill="#C7E01F"/>
+  <g stroke="#20201C" stroke-width="4.4" stroke-linecap="square" fill="none">
+    <path d="M10.2 6.5V25.5"/>
+    <path d="M12.6 16.2 21.8 7"/>
+    <path d="M12.6 15.8 22.6 25.5"/>
+  </g>
+</svg>
