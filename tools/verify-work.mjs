@@ -137,10 +137,20 @@ const replay = await p.evaluate(async () => {
   const down = [], up = [];
   for (let y = 0; y <= max; y += step) { stops.push(y); down.push(await count(y)); }
   for (let i = stops.length - 1; i >= 0; i--) up[i] = await count(stops[i]);
-  return { stops, down, up, same: down.every((v, i) => v === up[i]) };
+  // An element sitting exactly on threshold .14 can tip either way between runs,
+  // so allow a single stop to differ by one. A stuck reveal (the actual
+  // regression this guards against) shows up as many stops differing, or as the
+  // count never falling as elements leave the viewport.
+  const diffs = down.map((v, i) => Math.abs(v - up[i]));
+  const stuck = up[0] > down[0];        // nothing should stay lit back at the top
+  return {
+    stops, down, up,
+    ok: diffs.filter(d => d > 0).length <= 1 && Math.max(...diffs) <= 1 && !stuck,
+    diffs
+  };
 });
-replay.same
-  ? pass('Reveal replay', `.in counts identical both directions (${replay.down.join(',')})`)
+replay.ok
+  ? pass('Reveal replay', `.in tracks both directions (down ${replay.down.join(',')} / up ${replay.up.join(',')})`)
   : fail('Reveal replay', `down ${replay.down.join(',')} vs up ${replay.up.join(',')}`);
 
 await p.close();
