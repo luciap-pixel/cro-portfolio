@@ -176,9 +176,6 @@ main,section,footer{position:relative;z-index:1}
   transform:scaleY(0);transform-origin:center;transition:transform .38s var(--ease)}
 .svcrow.on::before{transform:scaleY(1)}
 .svcrow.on{background:var(--paper2)}
-.svcrow .rn{font-family:var(--display);font-weight:700;font-size:var(--t-xs);letter-spacing:.07em;
-  color:var(--mute2);flex:none;width:1.8em;transition:color var(--base)}
-.svcrow.on .rn{color:var(--pop-text)}
 .svcrow .rico{flex:none;width:1.5rem;height:1.5rem;transition:transform .38s var(--ease)}
 .svcrow .rico svg{width:100%;height:100%;fill:none;stroke:var(--mute);stroke-width:1.7;
   stroke-linecap:round;stroke-linejoin:round;transition:stroke var(--base)}
@@ -481,7 +478,7 @@ main,section,footer{position:relative;z-index:1}
 <main>
   <section class="phero pad"><div class="wrap">
     <h1 class="ptitle rev">A tight set of services, all pointed at one thing.</h1>
-    <p class="plead rev">Turning the visitors you already have into revenue. Start with the free teardown. If we move forward, you get a fixed price before any work begins.</p>
+    <p class="plead rev">Turning the visitors you already have into revenue. Start with the free teardown.</p>
   </div></section>
 
   <section class="sec pad" style="padding-top:var(--s8)" id="what"><div class="wrap">
@@ -902,10 +899,8 @@ var REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
   ];
 
   list.innerHTML=SERVICES.map(function(s,i){
-    var n=String(i+1).padStart(2,'0');
     return '<div class="svcitem" data-i="'+i+'">'+
       '<button class="svcrow" type="button" data-i="'+i+'" aria-describedby="pv-'+i+'">'+
-        '<span class="rn">'+n+'</span>'+
         '<span class="rico">'+ICON[i]+'</span>'+
         '<span class="rmain">'+
           '<span class="rt">'+s.n+'</span>'+
