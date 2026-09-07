@@ -223,8 +223,11 @@ document.querySelectorAll('.an').forEach(function(e){io2.observe(e);});
 })();
 
 /* routing */
-var MAP={'/':'p-home','/work':'p-work','/services':'p-services','/process':'p-process','/about':'p-about','/contact':'p-contact'};
-function route(){var h=location.hash.replace('#','')||'/';if(!MAP[h])h='/';
+var MAP={'/':'p-home','/work':'p-work','/services':'p-services','/about':'p-about','/contact':'p-contact'};
+function route(){var h=location.hash.replace('#','')||'/';
+  /* Process was merged into Services. replace() so the dead route does not sit in the back button. */
+  if(h==='/process'){location.replace('/services/');return;}
+  if(!MAP[h])h='/';
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   var el=document.getElementById(MAP[h]);if(el)el.classList.add('active');
   document.querySelectorAll('.nlinks a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+h);});
