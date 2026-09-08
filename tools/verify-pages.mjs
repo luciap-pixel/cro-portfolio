@@ -163,7 +163,7 @@ const html = fs.readFileSync(FILE, 'utf8');
 const css = html.slice(html.indexOf('<style>') + 7, html.indexOf('</style>'))
   .replace(/\/\*[\s\S]*?\*\//g, '');
 // classes the JS applies at runtime, so absent from the static markup
-const STATE = /\.(in|on|open|stuck|hid|live|out|js|soon|done|active|lit)\b/g;
+const STATE = /\.(in|on|open|stuck|hid|live|out|js|soon|done|active|lit|b)\b/g;
 const preludes = [];
 {
   let i = 0, ctx = [];
