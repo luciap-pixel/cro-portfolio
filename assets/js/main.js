@@ -141,9 +141,8 @@ function witem(w,i){
   var frameOpen=isLive?'<a class="wframe" href="'+w.url+'" target="_blank" rel="noopener" aria-label="Open '+w.name+'">':'<div class="wframe">';
   var frameClose=isLive?'</a>':'</div>';
   var frame=frameOpen+
-    '<div class="wbar"><i></i><i></i><i></i><em>'+w.dom+'</em></div>'+
     '<div class="wscroll"><img loading="lazy" decoding="async" src="'+(IMG[w.img]||'')+'" alt="'+w.name+'"></div>'+
-    (isLive?'<span class="whint">Hover to scroll · click to open</span>':'')+frameClose;
+    frameClose;
   var cta=isLive?'<a href="'+w.url+'" target="_blank" rel="noopener" class="arrowlink" style="font-size:var(--t-md)">Open the live page <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>':'<span class="arrowlink" style="font-size:var(--t-md);color:var(--mute)">Live soon</span>';
   return '<div class="witem"><div class="meta">'+
     '<div class="wtop"><span class="wnum">'+n+'</span><span class="wbadge">'+(w.badge||'Concept redesign · live')+'</span></div>'+
@@ -234,7 +233,25 @@ function route(){var h=location.hash.replace('#','')||'/';
   document.getElementById('mob').classList.remove('open');scrollTo(0,0);
   requestAnimationFrame(function(){document.querySelectorAll('.page.active .rev').forEach(function(e,i){if(e.getBoundingClientRect().top<innerHeight*1.05)setTimeout(function(){e.classList.add('in');if(e.id==='an')e.classList.add('in-view');},i*55);});obs();});}
 addEventListener('hashchange',route);route();
-addEventListener('scroll',function(){document.getElementById('nav').classList.toggle('stuck',scrollY>24);},{passive:true});
+/* nav: solid once you leave the top, and hidden while scrolling down.
+   One rAF-gated pass; direction comes from comparing against the last offset. */
+(function(){
+  var nav=document.getElementById('nav'); if(!nav) return;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var last=scrollY, ticking=false;
+  function update(){
+    ticking=false;
+    var y=scrollY<0?0:scrollY;
+    nav.classList.toggle('stuck',y>24);
+    if(reduce){ nav.classList.remove('hide'); last=y; return; }
+    if(y<80){ nav.classList.remove('hide'); }            /* always shown near the top */
+    else if(y>last+4){ nav.classList.add('hide'); }      /* scrolling down */
+    else if(y<last-4){ nav.classList.remove('hide'); }   /* scrolling up */
+    last=y;
+  }
+  addEventListener('scroll',function(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } },{passive:true});
+  update();
+})();
 document.getElementById('burger').addEventListener('click',function(){document.getElementById('mob').classList.toggle('open');});
 /* team: circular selector + hover photo cycle */
 (function(){
