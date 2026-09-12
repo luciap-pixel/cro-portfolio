@@ -107,7 +107,27 @@ main,section,footer{position:relative;z-index:1}
 .nlinks{display:flex;gap:clamp(1.25rem,2vw,2rem);list-style:none;align-items:center;font-weight:600;font-size:var(--t-base)}
 .nlinks a{color:var(--ink);position:relative;padding-block:.3em}
 .nlinks a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1.5px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform var(--base)}
-.nlinks a:hover::after,.nlinks a.on::after{transform:scaleX(1)}
+.nlinks a.on::after{transform:scaleX(1)}
+/* nav links: per-letter flip on hover */
+.flip{position:relative;display:inline-flex;overflow:hidden;line-height:1.15;padding-block:.1em;cursor:pointer}
+.flip .row{display:inline-flex}
+.flip .row.copy{position:absolute;left:0;top:0}
+.flip .ch{display:inline-block;white-space:pre;
+  transition:transform .42s cubic-bezier(.6,0,.2,1);
+  transition-delay:calc(var(--d) * 26ms)}
+.flip:hover .row.top .ch{transform:translateY(-115%)}
+.flip .row.copy .ch{transform:translateY(115%)}
+.flip:hover .row.copy .ch{transform:translateY(0)}
+.flip .row.copy{color:var(--pop-ink)}
+@media (prefers-reduced-motion:reduce){
+  .flip .ch{transition:none!important}
+  .flip:hover .row.top .ch{transform:none}
+  .flip .row.copy{display:none}
+}
+/* .nlinks a keeps its .3em block padding (it outranks .flip's .1em), so the
+   incoming copy row has to start at that same offset. At top:0 it landed
+   4.8px high and its letter tops showed under the resting word. */
+.nlinks a.flip .row.copy{top:.3em}
 .navr{display:flex;align-items:center;gap:var(--s4)}
 .navr .btn.pop{padding:.7em 1.3em;font-size:var(--t-base)}
 .navmail{font-weight:600;font-size:var(--t-sm)}
@@ -356,10 +376,10 @@ a.c-cta:hover .ico{background:var(--pop);border-color:transparent;transform:rota
 <nav class="nav" id="nav">
   <a href="/#/" class="logo"><b></b>Konar Studio</a>
   <ul class="nlinks">
-    <li><a href="/work/" class="on" aria-current="page">Work</a></li>
-    <li><a href="/services/">Services</a></li>
+    <li><a href="/work/" class="flip on" aria-current="page" data-flip>Work</a></li>
+    <li><a class="flip" data-flip href="/services/">Services</a></li>
     
-    <li><a href="/about/">About</a></li>
+    <li><a class="flip" data-flip href="/about/">About</a></li>
   </ul>
   <div class="navr">
     <a href="mailto:lucia@konar.studio" class="navmail">lucia@konar.studio</a>
@@ -643,6 +663,26 @@ var REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
   },3000);
 })();
 
+
+/* nav links: build the two letter rows for the flip hover */
+document.querySelectorAll('[data-flip]').forEach(function(el){
+  var text = el.textContent.trim();
+  function rowFor(cls){
+    var row = document.createElement('span'); row.className = 'row ' + cls;
+    row.setAttribute('aria-hidden', 'true');
+    text.split('').forEach(function(c, i){
+      var s = document.createElement('span'); s.className = 'ch';
+      s.style.setProperty('--d', i);
+      s.textContent = c;
+      row.appendChild(s);
+    });
+    return row;
+  }
+  el.setAttribute('aria-label', text);   /* read the word once, not letter by letter twice */
+  el.textContent = '';
+  el.appendChild(rowFor('top'));
+  el.appendChild(rowFor('copy'));
+});
 
 /* ---------- nav: pill goes solid once you leave the top ---------- */
 (function(){

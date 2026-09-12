@@ -70,18 +70,34 @@ h1,h2,h3,.h1,.h2,.h3,.h4,.hword,.hword span,.footbig,.footbig span,.bigcta h2,.s
   width:min(1180px,calc(100% - 2*var(--pad)));padding:.7rem .7rem .7rem 1.4rem;
   border-radius:999px;background:rgba(244,242,236,.5);border:1px solid rgba(220,216,204,.5);
   backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);
-  box-shadow:0 10px 30px -18px rgba(32,32,28,.3);transition:box-shadow var(--base),background var(--base),width var(--base),transform 300ms ease}
+  box-shadow:0 10px 30px -18px rgba(32,32,28,.3);transition:box-shadow var(--base),background var(--base),width var(--base)}
 .nav.stuck{background:rgba(244,242,236,.68);box-shadow:0 14px 34px -18px rgba(32,32,28,.35)}
-/* hide while scrolling down, reveal on the way up. translateX(-50%) is the
-   centring, so it has to be carried through both states. */
-.nav{will-change:transform}
-.nav.hide{transform:translateX(-50%) translateY(calc(-100% - clamp(.75rem,1.6vw,1.25rem) - 8px))}
 .logo{font-family:var(--display);font-weight:700;font-size:1.3rem;letter-spacing:-.03em;display:flex;align-items:center;gap:.45em}
 .logo b{width:.55em;height:.55em;border-radius:50%;background:var(--pop);display:block}
 .nlinks{display:flex;gap:clamp(1.25rem,2vw,2rem);list-style:none;align-items:center;font-weight:600;font-size:var(--t-base)}
 .nlinks a{color:var(--ink);position:relative;padding-block:.3em}
 .nlinks a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1.5px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform var(--base)}
-.nlinks a:hover::after,.nlinks a.on::after{transform:scaleX(1)}
+.nlinks a.on::after{transform:scaleX(1)}
+/* nav links: per-letter flip on hover */
+.flip{position:relative;display:inline-flex;overflow:hidden;line-height:1.15;padding-block:.1em;cursor:pointer}
+.flip .row{display:inline-flex}
+.flip .row.copy{position:absolute;left:0;top:0}
+.flip .ch{display:inline-block;white-space:pre;
+  transition:transform .42s cubic-bezier(.6,0,.2,1);
+  transition-delay:calc(var(--d) * 26ms)}
+.flip:hover .row.top .ch{transform:translateY(-115%)}
+.flip .row.copy .ch{transform:translateY(115%)}
+.flip:hover .row.copy .ch{transform:translateY(0)}
+.flip .row.copy{color:var(--pop-ink)}
+@media (prefers-reduced-motion:reduce){
+  .flip .ch{transition:none!important}
+  .flip:hover .row.top .ch{transform:none}
+  .flip .row.copy{display:none}
+}
+/* .nlinks a keeps its .3em block padding (it outranks .flip's .1em), so the
+   incoming copy row has to start at that same offset. At top:0 it landed
+   4.8px high and its letter tops showed under the resting word. */
+.nlinks a.flip .row.copy{top:.3em}
 .navr{display:flex;align-items:center;gap:var(--s4)}
 .navr .btn.pop{padding:.7em 1.3em;font-size:var(--t-base)}
 .navmail{font-weight:600;font-size:var(--t-sm)}.navmail:hover{color:var(--mute)}

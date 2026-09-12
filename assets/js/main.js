@@ -233,25 +233,33 @@ function route(){var h=location.hash.replace('#','')||'/';
   document.getElementById('mob').classList.remove('open');scrollTo(0,0);
   requestAnimationFrame(function(){document.querySelectorAll('.page.active .rev').forEach(function(e,i){if(e.getBoundingClientRect().top<innerHeight*1.05)setTimeout(function(){e.classList.add('in');if(e.id==='an')e.classList.add('in-view');},i*55);});obs();});}
 addEventListener('hashchange',route);route();
-/* nav: solid once you leave the top, and hidden while scrolling down.
-   One rAF-gated pass; direction comes from comparing against the last offset. */
+/* nav: always on screen; the pill just goes a little more solid past 24px */
 (function(){
   var nav=document.getElementById('nav'); if(!nav) return;
-  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var last=scrollY, ticking=false;
-  function update(){
-    ticking=false;
-    var y=scrollY<0?0:scrollY;
-    nav.classList.toggle('stuck',y>24);
-    if(reduce){ nav.classList.remove('hide'); last=y; return; }
-    if(y<80){ nav.classList.remove('hide'); }            /* always shown near the top */
-    else if(y>last+4){ nav.classList.add('hide'); }      /* scrolling down */
-    else if(y<last-4){ nav.classList.remove('hide'); }   /* scrolling up */
-    last=y;
-  }
+  var ticking=false;
+  function update(){ ticking=false; nav.classList.toggle('stuck',scrollY>24); }
   addEventListener('scroll',function(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } },{passive:true});
   update();
 })();
+/* nav links: build the two letter rows for the flip hover */
+document.querySelectorAll('[data-flip]').forEach(function(el){
+  var text = el.textContent.trim();
+  function rowFor(cls){
+    var row = document.createElement('span'); row.className = 'row ' + cls;
+    row.setAttribute('aria-hidden', 'true');
+    text.split('').forEach(function(c, i){
+      var s = document.createElement('span'); s.className = 'ch';
+      s.style.setProperty('--d', i);
+      s.textContent = c;
+      row.appendChild(s);
+    });
+    return row;
+  }
+  el.setAttribute('aria-label', text);   /* read the word once, not letter by letter twice */
+  el.textContent = '';
+  el.appendChild(rowFor('top'));
+  el.appendChild(rowFor('copy'));
+});
 document.getElementById('burger').addEventListener('click',function(){document.getElementById('mob').classList.toggle('open');});
 /* team: circular selector + hover photo cycle */
 (function(){
